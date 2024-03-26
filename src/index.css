@@ -1,13 +1,191 @@
-body {
+* {
+  box-sizing: border-box;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/*--------------------------------------------------------------------MENUS--------------------------------------------------------------------*/
+.menu-div-master {
+  background-color: transparent;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  height: 80px;
 }
+
+.container-menu {
+  background-color: transparent;
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  align-items: center;
+}
+
+#logoZe {
+  width: auto;
+  height: 40px;
+}
+
+.menusNav {
+  width: 40%;
+  align-items: center;
+  display: flex;
+  justify-content: space-around;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.fontNav {
+  font-family: "Montserrat", Arial, Helvetica, sans-serif;
+  font-size: 17px;
+  font-weight: 650;
+}
+
+#paginaInicial {
+  color: #294b29;
+}
+
+#paginaInicial:hover {
+  background: linear-gradient(to right, #294b29, #50623a, #789461, #789461);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+#contatoId:hover {
+  background: linear-gradient(to right, #294b29, #50623a, #789461, #789461);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+#sobreNos:hover {
+  background: linear-gradient(to right, #294b29, #50623a, #789461, #789461);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ----------------------------------------- BOTÕES CADASTRO E LOGIN ---------------------------------------------- */
+
+.btnLogin {
+  background-color: #50623a;
+  padding: 7px;
+  color: white;
+  border-radius: 6px;
+  font-family: "Mulish", Arial, Helvetica, sans-serif;
+  font-weight: 800;
+  box-shadow: none;
+  border: none;
+  font-size: 15px;
+}
+
+.btnLogin:hover {
+  background: linear-gradient(to right, #294b29, #50623a, #789461, #789461);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  cursor: pointer;
+  border: #789461 solid 2px;
+}
+
+.btnCadastrar {
+  background-color: transparent;
+  padding: 7px;
+  color: #50623a;
+  border-radius: 6px;
+  font-family: "Mulish", Arial, Helvetica, sans-serif;
+  font-weight: 800;
+  box-shadow: none;
+  border: none;
+  margin-right: 10px;
+  font-size: 15px;
+}
+
+.btnCadastrar:hover {
+  background: linear-gradient(to right, #294b29, #50623a, #789461, #789461);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  cursor: pointer;
+}
+
+/* -------------------------------------------- SEÇÃO HOME --------------------------------------------------- */
+
+.sectionHome {
+  padding: 0;
+  margin: 0;
+  justify-content: center;
+  display: flex;
+  height: 600px;
+  width: 100%;
+}
+
+/* ------------------------------------------------- LADO ESQUERDO ---------------------------------------------- */
+.textosHome {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1;
+  justify-content: center;
+}
+
+#tituloHome {
+  font-size: 40px;
+  font-family: "Montserrat", Arial, Helvetica, sans-serif;
+  background: linear-gradient(to right, #294b29, #50623a, #789461, #789461);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-weight: 800;
+  line-height: 56px;
+}
+
+#subtituloHome {
+  font-size: 16px;
+  font-family: "Mulish", Arial, Helvetica, sans-serif;
+  font-weight: 600;
+}
+
+#btnContrate {
+  background: linear-gradient(to right, #294b29, #50623a, #789461, #789461);
+  width: 15vw;
+  height: 44px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: bold;
+  color: white;
+  font-family: "Mulish", Arial, Helvetica, sans-serif;
+  border: none;
+  box-shadow: 0;
+}
+
+#btnContrate:hover {
+  cursor: pointer;
+}
+
+.divSubtituloHome {
+  margin-top: 2vh;
+  width: 70%;
+}
+
+/* -------------------------------------------------- LADO DIREITO ----------------------------------------------------------------------------- */
+
+.divFotoHome {
+  width: 55%;
+  height: 100%;
+  z-index: 0;
+}
+
+#fotoHome {
+  width: auto;
+  height: 90vh;
+}
+
+/*----------------------------------------------------------------------------------------------------------------------------------------------*/
