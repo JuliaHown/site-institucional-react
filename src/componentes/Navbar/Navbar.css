@@ -1,0 +1,25 @@
+* {
+  font-family: "Open Sans", "Montserrat", Arial, Helvetica, sans-serif;
+}
+
+nav ul {
+  padding: 6vh;
+  margin-left: 13vw;
+}
+
+nav ul li {
+  display: inline;
+  margin-right: 5vw;
+}
+
+nav ul li .active {
+  color: #294b29;
+}
+
+nav ul li a {
+  font-family: 'Montserrat';
+  font-weight: 600;
+  text-decoration: none;
+  color: #000;
+  font-size: 14px;
+}
