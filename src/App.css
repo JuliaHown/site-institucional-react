@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+* {
+    font-family: 'Open Sans', 'Montserrat', Arial, Helvetica, sans-serif;
+    --verde-escuro: #294B29;
+    --verde-musgo: #50623A;
+    --verde-oliva: #789461;
+    --verde-pastel: #DBE7C9;
+    --preto: #000000;
+    --background: #FBFBFB;
+    --background-dark: #1E1E1E;
+    --card-background: #F8F8FF;
+    --card-background-stroke: #C2C2C2;
+}
+
+.App {
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--background);
+}
+
+.App-header {
+    display: flex;
+}
+
+.btn-user {
+    display: flex;
+    margin: 3vh;
+    align-items: center;
+    margin-left: 10vw;
+}
+
+.btn-Cadastrar {
+    background: none;
+    border: none;
+    outline: none;
+    font-family: 'Open Sans';
+    font-weight: 700;
+    margin-right: 2vw;
+}
+
+.btn-Login {
+    background: var(--verde-musgo);
+    border: none;
+    outline: none;
+    color: #fff;
+    border-radius: 6px;
+    width: 6vw;
+    height: 3.5vh;
+    font-family: 'Open Sans';
+    font-weight: 500;
+}
