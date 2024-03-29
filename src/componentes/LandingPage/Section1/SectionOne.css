@@ -1,0 +1,91 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
+
+:root {
+  --verde-escuro: #294b29;
+  --verde-musgo: #50623a;
+  --verde-oliva: #789461;
+  --verde-pastel: #dbe7c9;
+  --preto: #000000;
+  --background: #fbfbfb;
+  --background-dark: #1e1e1e;
+  --card-background: #f8f8ff;
+  --card-background-stroke: #c2c2c2;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.first-lading-page {
+    justify-content: center;
+    display: flex;
+    height: 700px;
+    width: 100%;
+  }
+  
+  .left-content {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-items: flex-start;
+    justify-content: center;
+    margin-left: 10%;
+  }
+  
+  .titulo {
+    font-size: 3.3rem;
+    font-family: "Montserrat", Arial, Helvetica, sans-serif;
+    font-weight: 800;
+    background: linear-gradient(to right, #294b29, #50623a, #789461, #789461);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    line-height: 1;
+    margin-bottom: 4%;
+  }
+  
+  .texto {
+    color: #000000;
+    font-size: 1rem;
+    font-weight: 400;
+    font-family: "Open Sans", Arial, Helvetica, sans-serif;
+    line-height: 1.5;
+    margin-bottom: 5vh;
+  }
+  
+  .btn-saiba-mais {
+    background: linear-gradient(to right, #294b29, #50623a, #789461, #789461);
+    width: 30%;
+    height: 44px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: bold;
+    color: white;
+    font-family: "Mulish", Arial, Helvetica, sans-serif;
+    border: none;
+    box-shadow: none;
+    margin-bottom: 2vh;
+  }
+  
+  .btn-saiba-mais:hover {
+    cursor: pointer;
+  }
+  
+  /* IMAGEM DA LANDING PAGE */
+  
+  .container-image {
+    flex: 1;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+  }
+  
+  .img-homem {
+    max-width: 100%;
+    max-height: 96vh;
+  }
