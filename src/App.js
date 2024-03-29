@@ -1,9 +1,8 @@
 import "./App.css";
 import Logo from "./componentes/Logo/Logo";
 import Navigation from "./componentes/Navbar/Navbar";
-import SectionUmLanding from "./componentes/LandingPage/Section1/SectionOne"
-import SectionDois from "./componentes/LandingPage/Section2/SectionTwo"
-
+import PaginaPrincipal from "./componentes/LandingPage/PaginaPrincipal/PaginaPrincipal";
+import SobreNos from "./componentes/LandingPage/SobreNos/Sobrenos"; 
 
 function App() {
   return (
@@ -17,9 +16,8 @@ function App() {
           <button className="btn-Login">Fazer Login</button>
         </div>
       </header>
-      
-      <SectionUmLanding></SectionUmLanding>
-      <SectionDois></SectionDois>
+      <PaginaPrincipal></PaginaPrincipal>
+      <SobreNos></SobreNos>
 
     </div>
   );

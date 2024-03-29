@@ -1,6 +1,6 @@
-import "./SectionTwo.css";
+import "./Sobrenos.css";
 
-function SectionTwo() {
+function sobreNos() {
     return (
         <section className="second-landing-page">
         <div>
@@ -21,4 +21,4 @@ function SectionTwo() {
     );
 }
 
-export default SectionTwo
+export default sobreNos
