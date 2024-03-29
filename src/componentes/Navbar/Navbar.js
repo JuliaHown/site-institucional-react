@@ -1,15 +1,19 @@
-import './Navbar.css';
+import "./Navbar.css";
+
+const textosOpcoes = ["Página inicial", "Sobre nós", "Contrate"];
 
 function Navbar() {
-    return (
-        <nav>
-            <ul>
-                <li className='active'><a href="#">Página Inicial</a></li>
-                <li><a href="#">Sobre nós</a></li>
-                <li><a href="#">Contrate</a></li>
-            </ul>
-        </nav>
-    )
+  return (
+    <nav>
+      <ul className="opcoes">
+        {textosOpcoes.map((texto) => ( 
+          <li className="opcao">
+            <p>{texto}</p>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  );
 }
 
-export default Navbar
+export default Navbar;
