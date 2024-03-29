@@ -1,4 +1,4 @@
-import "../../../componentes/LandingPage/Section1/SectionOne.css";
+import "./SectionOne.css";
 import ImgLanding from "../../../assets/Homem.svg"
 
 function SectionOne() {
