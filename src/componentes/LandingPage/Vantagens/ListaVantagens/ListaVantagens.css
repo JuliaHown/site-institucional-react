@@ -1,0 +1,18 @@
+.lista ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .lista li {
+    margin-bottom: 20px;
+  }
+  
+  .lista h3 {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+  }
+  
+  .lista p {
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
