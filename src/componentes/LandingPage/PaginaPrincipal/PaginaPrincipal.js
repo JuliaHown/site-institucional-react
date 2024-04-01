@@ -1,8 +1,8 @@
 import React from "react";
 import "./PaginaPrincipal.css";
-import ImgLanding from "../../../assets/Homem.svg";
 import styled from "styled-components";
 import BotaoSaiba from "../../ButtonSaibaMais/Button";
+import ImagemUm from "./Imagem/Imagem";
 
 const FirstLandingContainer = styled.section`
   justify-content: center;
@@ -66,11 +66,7 @@ function PaginaPrincipal() {
         <BotaoSaiba>Saiba mais</BotaoSaiba>
       </LeftContainer>
       <ImagemContainer>
-        <img
-          src={ImgLanding}
-          alt="Um homem de pele escura com camiseta polo e boné da cor azul escuro, sorrindo com algumas caixas de papelão na mão direita."
-          className="img-homem"
-        ></img>
+        <ImagemUm></ImagemUm>
       </ImagemContainer>
     </FirstLandingContainer>
   );

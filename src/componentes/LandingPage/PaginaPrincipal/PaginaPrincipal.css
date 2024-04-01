@@ -19,21 +19,6 @@
   box-sizing: border-box;
 }
   
-  .btn-saiba-mais {
-    
-  }
-  
-  .btn-saiba-mais:hover {
-    cursor: pointer;
-  }
-  
-  /* IMAGEM DA LANDING PAGE */
-  
-  .img-homem {
-    max-width: 100%;
-    max-height: 96vh;
-  }
-
   /* Modo escuro */
 .dark-mode {
   --background: #1E1E1E;
