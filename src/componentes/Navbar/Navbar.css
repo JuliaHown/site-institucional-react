@@ -8,12 +8,13 @@ nav  {
   left: 0;
   width: 100%;
   z-index: 1000;
-  margin-left: 15%;
+  margin-left: 16%;
   margin-top: 2.8%;
 }
 
 .opcoes {
-  font-family: 'Open Sans', "Montserrat", Arial, Helvetica, sans;
+  font-family: 'Montserrat', Arial, Helvetica;
+  font-weight: 600;
   list-style-type: none; 
   padding: 0; 
   margin: 0;
@@ -26,7 +27,16 @@ nav  {
 
 .opcao p {
   color: #000; 
-  font-size: 18px; 
+  font-size: 1rem; 
   margin: 0; 
   padding: 5px 10px; 
 }
+
+.verde {
+  color: #294B29;
+}
+
+.preto {
+  color: black;
+}
+

@@ -3,13 +3,13 @@ import Navbar from "../Navbar";
 
 const Home = () => {
   return (
-    <div className="home-container">
+    <div className="App-container">
       <Navbar />
-      <div className="home-banner-container">
-        <div className="home-bannerImage-container">
+      <div className="App-banner-container">
+        <div className="App-bannerImage-container">
           <imgHomem />
         </div>
-        <div className="home-text-section">
+        <div className="App-text-section">
           <h1 className="primary-reading">
             O seu parceiro na <br />
             gestão de encomendas
@@ -21,7 +21,7 @@ const Home = () => {
           </p>
           <button className="primary-button">Saiba mais</button>
           <ImageComponent
-            src="../../public/assets/imgMen.png"
+            src="/src/assets/imgMen.png"
             alt="Um homem sorrindo enquanto segura uma caixa de papelão"
             className="imagem-principal"
           />

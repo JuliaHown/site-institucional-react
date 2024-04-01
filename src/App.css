@@ -19,21 +19,6 @@
   box-sizing: border-box;
 }
 
-.App {
-  font-family: "Open Sans", "Montserrat", "Mulish", Arial, Helvetica, sans-serif;
-  width: 100vw;
-  height: 100vh;
-  background-color: var(--background);
-  box-sizing: border-box;
-  scroll-behavior: smooth;
-  scrollbar-width: none;
-}
-
-.App-header {
-  position: relative;
-  display: flex;
-}
-
 /* BOTÕES DA NAVIGATION */
 
 .btn-user {
@@ -64,4 +49,28 @@
   font-weight: 500;
 }
 
+ /* Modo escuro */
+ 
+ .dark-mode {
+  --background: #1E1E1E;
+  --preto: #ffffff;
+  --texto: #ffffff;
+  --link: #90caf9;
+}
 
+.dark-mode .titulo {
+  background: linear-gradient(to right, #789461, #50623a, #294b29, #294b29);
+}
+
+.dark-mode .texto {
+  color: white;
+}
+
+.dark-mode .btn-saiba-mais {
+  background: linear-gradient(to right, #789461, #50623a, #294b29, #294b29);
+  color: white;
+}
+
+.dark-mode .btn-saiba-mais:hover {
+  color: #c1c1c1;
+}

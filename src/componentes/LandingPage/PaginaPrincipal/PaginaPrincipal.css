@@ -18,58 +18,9 @@
   padding: 0;
   box-sizing: border-box;
 }
-
-.first-lading-page {
-    justify-content: center;
-    display: flex;
-    height: 700px;
-    width: 100%;
-  }
-  
-  .left-content {
-    flex: 1;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    align-items: flex-start;
-    justify-content: center;
-    margin-left: 10%;
-  }
-  
-  .titulo {
-    font-size: 3.3rem;
-    font-family: "Montserrat", Arial, Helvetica, sans-serif;
-    font-weight: 800;
-    background: linear-gradient(to right, #294b29, #50623a, #789461, #789461);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    line-height: 1;
-    margin-bottom: 4%;
-  }
-  
-  .texto {
-    color: #000000;
-    font-size: 1rem;
-    font-weight: 400;
-    font-family: "Open Sans", Arial, Helvetica, sans-serif;
-    line-height: 1.5;
-    margin-bottom: 5vh;
-  }
   
   .btn-saiba-mais {
-    background: linear-gradient(to right, #294b29, #50623a, #789461, #789461);
-    width: 30%;
-    height: 44px;
-    border-radius: 10px;
-    font-size: 15px;
-    font-weight: bold;
-    color: white;
-    font-family: "Mulish", Arial, Helvetica, sans-serif;
-    border: none;
-    box-shadow: none;
-    margin-bottom: 2vh;
+    
   }
   
   .btn-saiba-mais:hover {
@@ -78,14 +29,32 @@
   
   /* IMAGEM DA LANDING PAGE */
   
-  .container-image {
-    flex: 1;
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-end;
-  }
-  
   .img-homem {
     max-width: 100%;
     max-height: 96vh;
   }
+
+  /* Modo escuro */
+.dark-mode {
+  --background: #1E1E1E;
+  --preto: #ffffff;
+  --texto: #ffffff;
+  --link: #90caf9;
+}
+
+.dark-mode .titulo {
+  background: linear-gradient(to right, #789461, #50623a, #294b29, #294b29);
+}
+
+.dark-mode .texto {
+  color: white;
+}
+
+.dark-mode .btn-saiba-mais {
+  background: linear-gradient(to right, #789461, #50623a, #294b29, #294b29);
+  color: white;
+}
+
+.dark-mode .btn-saiba-mais:hover {
+  color: #c1c1c1;
+}
