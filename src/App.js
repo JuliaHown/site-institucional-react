@@ -1,5 +1,5 @@
-import React from "react";
 import styled from "styled-components";
+import GlobalStyle from "./GlobalStyle";
 import Logo from "./componentes/Logo/Logo";
 import Navigation from "./componentes/Navbar/Navbar";
 import PaginaPrincipal from "./componentes/LandingPage/PaginaPrincipal/PaginaPrincipal";
@@ -9,7 +9,7 @@ import CadastroLogin from "./componentes/Navbar/Buttons/Buttons";
 
 
 const AppContainer = styled.div`
-  font-family: "Open Sans", "Montserrat", "Mulish", Arial, Helvetica, sans-serif;
+  font-family: 'Open Sans', 'Montserrat', 'Mulish', Arial, Helvetica, sans-serif;
   width: 100vw;
   height: 100vh;
   background-color: var(--background);
@@ -26,17 +26,22 @@ const AppHeader = styled.div`
 
 function App() {
   return (
-    <AppContainer>
-      <AppHeader>
-        <Logo></Logo>
-        <Navigation></Navigation>
-        <CadastroLogin/>
-      </AppHeader>
+    <>
+      <GlobalStyle />
 
-      <PaginaPrincipal></PaginaPrincipal>
-      <SobreNos></SobreNos>
-      <Vantagens></Vantagens>
-    </AppContainer>
+      <AppContainer>
+        <AppHeader>
+          <Logo />
+          <Navigation />
+          <CadastroLogin />
+        </AppHeader>
+
+        <PaginaPrincipal />
+        <SobreNos />
+        <Vantagens />
+      </AppContainer>
+
+    </>
   );
 }
 
