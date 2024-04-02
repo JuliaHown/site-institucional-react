@@ -1,11 +1,12 @@
 import React from "react";
-import "./App.css";
+import styled from "styled-components";
 import Logo from "./componentes/Logo/Logo";
 import Navigation from "./componentes/Navbar/Navbar";
 import PaginaPrincipal from "./componentes/LandingPage/PaginaPrincipal/PaginaPrincipal";
 import SobreNos from "./componentes/LandingPage/SobreNos/Sobrenos";
 import Vantagens from "./componentes/LandingPage/Vantagens/Vantagens";
-import styled from "styled-components";
+import CadastroLogin from "./componentes/Navbar/Buttons/Buttons";
+
 
 const AppContainer = styled.div`
   font-family: "Open Sans", "Montserrat", "Mulish", Arial, Helvetica, sans-serif;
@@ -22,16 +23,14 @@ const AppHeader = styled.div`
   display: flex;
 `;
 
+
 function App() {
   return (
     <AppContainer>
       <AppHeader>
         <Logo></Logo>
         <Navigation></Navigation>
-        <div className="btn-user">
-          <button className="btn-Cadastrar">Cadastrar</button>
-          <button className="btn-Login">Fazer Login</button>
-        </div>
+        <CadastroLogin/>
       </AppHeader>
 
       <PaginaPrincipal></PaginaPrincipal>
