@@ -1,7 +1,53 @@
-import "./ListaVantagens.css";
+import styled from "styled-components";
 import Grow from "../../../../assets/grow.png";
 import Check from "../../../../assets/check.png";
 import Light from "../../../../assets/lightbulb.png";
+
+const ListaUl = styled.ul`
+  list-style-type: none;
+  padding: 0;
+`;
+
+const ListaContent = styled.div`
+  margin-bottom: 20px;
+  display: flex;
+`;
+
+const ListItem = styled.li`
+  display: flex;
+  align-items: center;
+`;
+
+const IconWrapper = styled.div`
+  margin-top: 1.5vh;
+  margin-right: 13px;
+  align-items: center;
+  justify-content: center;
+  background-color: #f3f3f3;
+  border: 1px solid #acabab;
+  border-radius: 10%;
+  padding: 8px;
+  width: 50px;
+  height: 47px;
+
+  img {
+    width: auto;
+    height: 30px;
+  }
+`;
+
+const ContentWrapper = styled.div`
+  h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+  }
+
+  p {
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+`;
 
 const listaDasVantagens = [
   "Simplificação da Gestão",
@@ -20,19 +66,23 @@ const icones = [Light, Grow, Check];
 function ListaVantagens() {
   return (
     <div>
-      <ul>
+
+      <ListaUl>
         {listaDasVantagens.map((vantagem, index) => (
-          <li key={index}>
-          <div className="icon-wrapper">
-            <img src={icones[index]} alt="Ícone" /> 
-          </div>
-          <div className="content-wrapper">
-            <h3>{vantagem}</h3>
-            <p>{listaDescricao[index]}</p>
-          </div>
-        </li>
+          <ListaContent key={index}>
+            <ListItem>
+              <IconWrapper>
+                <img src={icones[index]} alt="Ícone" />
+              </IconWrapper>
+              <ContentWrapper>
+                <h3>{vantagem}</h3>
+                <p>{listaDescricao[index]}</p>
+              </ContentWrapper>
+            </ListItem>
+          </ListaContent>
         ))}
-      </ul>
+      </ListaUl>
+
     </div>
   );
 }

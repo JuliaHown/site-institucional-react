@@ -1,10 +1,9 @@
 import React from "react";
-import "./PaginaPrincipal.css";
 import styled from "styled-components";
 import BotaoSaiba from "../../ButtonSaibaMais/Button";
 import ImagemUm from "./Imagem/Imagem";
 
-const FirstLandingContainer = styled.section`
+const Container = styled.section`
   justify-content: center;
   display: flex;
   height: 700px;
@@ -52,7 +51,7 @@ const Texto = styled.span`
 
 function PaginaPrincipal() {
   return (
-    <FirstLandingContainer>
+    <Container>
       <LeftContainer>
         <Titulo>
           O seu parceiro na <br />
@@ -65,10 +64,12 @@ function PaginaPrincipal() {
         </Texto>
         <BotaoSaiba>Saiba mais</BotaoSaiba>
       </LeftContainer>
+
       <ImagemContainer>
         <ImagemUm></ImagemUm>
       </ImagemContainer>
-    </FirstLandingContainer>
+
+    </Container>
   );
 }
 
