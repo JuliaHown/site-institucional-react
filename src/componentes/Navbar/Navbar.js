@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import LoginCadastro from "../Navbar/Buttons/Buttons";
 
 const Container = styled.nav`
   position: relative;

@@ -29,7 +29,7 @@ const ImagemContainer = styled.div`
 
 const Titulo = styled.h1`
   font-size: 3.3rem;
-  font-family: "Montserrat", Arial, Helvetica, sans-serif;
+  font-family: 'Montserrat', Arial, Helvetica, sans-serif;
   font-weight: 800;
   background: linear-gradient(to right, #294b29, #50623a, #789461, #789461);
   -webkit-background-clip: text;
@@ -42,8 +42,8 @@ const Titulo = styled.h1`
 const Texto = styled.span`
   color: #000000;
   font-size: 1rem;
-  font-weight: 400;
-  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+  font-weight: 500;
+  font-family: 'Open Sans', Arial, Helvetica, sans-serif;
   line-height: 1.5;
   margin-bottom: 5vh;
 `;
