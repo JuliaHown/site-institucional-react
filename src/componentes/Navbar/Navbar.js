@@ -1,4 +1,3 @@
-import "../../style";
 import styled from "styled-components";
 import LoginCadastro from "../Navbar/Buttons/Buttons";
 

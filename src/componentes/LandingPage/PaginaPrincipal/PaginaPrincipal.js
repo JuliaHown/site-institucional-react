@@ -1,6 +1,5 @@
-import React from "react";
 import styled from "styled-components";
-import BotaoSaiba from "../../ButtonSaibaMais/Button";
+import BotaoSaiba from "./ButtonSaibaMais/Button";
 import ImagemUm from "./Imagem/Imagem";
 
 const Container = styled.section`
