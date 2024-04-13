@@ -1,8 +1,15 @@
 import { createGlobalStyle } from "styled-components";
+import MontserratFont from './fonts/Montserrat-Regular.ttf';
+
 
 const GlobalStyle = createGlobalStyle`
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url(${MontserratFont}) format('truetype');
+}
 
 :root {
   --verde-escuro: #294b29;
@@ -27,6 +34,11 @@ const GlobalStyle = createGlobalStyle`
   li {
     list-style: none;
   }
+
+  body {
+    background-color: #fbfbfb;
+  }
+  
 `;
 
 export default GlobalStyle;

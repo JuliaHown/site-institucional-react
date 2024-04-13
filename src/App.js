@@ -2,10 +2,14 @@ import styled from "styled-components";
 import GlobalStyle from "./GlobalStyle";
 import Logo from "./componentes/Logo/Logo";
 import Navigation from "./componentes/Navbar/Navbar";
+import CadastroLogin from "./componentes/Navbar/Buttons/Buttons";
+
 import PaginaPrincipal from "./componentes/LandingPage/PaginaPrincipal/PaginaPrincipal";
 import SobreNos from "./componentes/LandingPage/SobreNos/Sobrenos";
 import Vantagens from "./componentes/LandingPage/Vantagens/Vantagens";
-import CadastroLogin from "./componentes/Navbar/Buttons/Buttons";
+import Aplicativo from "./componentes/LandingPage/Aplicativo/Aplicativo";
+import FaleConosco from "./componentes/LandingPage/FaleConosco/FaleConosco";
+
 
 
 const AppContainer = styled.div`
@@ -39,6 +43,8 @@ function App() {
         <PaginaPrincipal />
         <SobreNos />
         <Vantagens />
+        <Aplicativo />
+        <FaleConosco/>
       </AppContainer>
 
     </>
