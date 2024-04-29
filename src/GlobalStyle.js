@@ -1,14 +1,37 @@
 import { createGlobalStyle } from "styled-components";
-import MontserratFont from './fonts/Montserrat-Regular.ttf';
+import Fonts from './Fonts';
 
 
 const GlobalStyle = createGlobalStyle`
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
 
 @font-face {
   font-family: 'Montserrat';
-  src: url(${MontserratFont}) format('truetype');
+  src: url(${Fonts.Montserrat.regular}) format('truetype');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url(${Fonts.Montserrat.bold}) format('truetype');
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url(${Fonts.Montserrat.extraBold}) format('truetype');
+  font-weight: 800; /* ou extra-bold */
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  src: url(${Fonts.OpenSans.regular}) format('truetype');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  src: url(${Fonts.OpenSans.bold}) format('truetype');
+  font-weight: bold;
 }
 
 :root {
