@@ -29,7 +29,7 @@ const ImagemContainer = styled.div`
 
 const Titulo = styled.h1`
   font-size: 3.3rem;
-  font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+  font-family: 'Montserrat';
   font-weight: 800;
   background: linear-gradient(to right, #294b29, #50623a, #789461, #789461);
   -webkit-background-clip: text;

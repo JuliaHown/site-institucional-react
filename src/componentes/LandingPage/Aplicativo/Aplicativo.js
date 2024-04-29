@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import Celular from "../../../assets/Iphone.svg";
 import GooglePlay from "../../../assets/google play.svg";
+import Fonts from '../../../Fonts';
 
 const MainContainer = styled.div`
   background-color: var(--background);
@@ -37,6 +38,7 @@ const TextosContainer = styled.div`
   margin-right: 7vw;
 
   h1 {
+    font-family: Montserrat
     font-size: 42px;
     font-weight: 800;
     margin-bottom: 20px;
