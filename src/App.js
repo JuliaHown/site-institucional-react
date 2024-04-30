@@ -8,7 +8,7 @@ import PaginaPrincipal from "./componentes/LandingPage/PaginaPrincipal/PaginaPri
 import SobreNos from "./componentes/LandingPage/SobreNos/Sobrenos";
 import Vantagens from "./componentes/LandingPage/Vantagens/Vantagens";
 import Aplicativo from "./componentes/LandingPage/Aplicativo/Aplicativo";
-import FaleConosco from "./componentes/LandingPage/FaleConosco/FaleConosco";
+import Footer from "./componentes/Footer/Footer";
 
 
 
@@ -44,7 +44,8 @@ function App() {
         <SobreNos />
         <Vantagens />
         <Aplicativo />
-        <FaleConosco/>
+        <Footer/>
+        
       </AppContainer>
 
     </>
