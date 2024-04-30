@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import Celular from "../../../assets/Iphone.svg";
 import GooglePlay from "../../../assets/google play.svg";
-import Fonts from '../../../Fonts';
 
 const MainContainer = styled.div`
   background-color: var(--background);
@@ -9,6 +8,7 @@ const MainContainer = styled.div`
   margin: 0 auto;
   padding: 10px;
   margin-top: 15vh;
+  margin-bottom: 12vh;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -31,27 +31,35 @@ const ImgCelular = styled.div`
 `;
 
 const TextosContainer = styled.div`
-  width: 70%;
-  padding: 20px;
+  width: 80%;
+  padding: 25px;
   flex-direction: column;
   margin-top: 29vh;
   margin-right: 7vw;
 
   h1 {
-    font-family: Montserrat
-    font-size: 42px;
-    font-weight: 800;
-    margin-bottom: 20px;
+  color: #294b29;
+  font: 700 46px/105% Montserrat, sans-serif;
+  margin-bottom: 3vh;
+  
+  @media (max-width: 991px) {
+    font-size: 40px;
   }
 
   span {
-  font-size: 15px;
+    color: #000;
+    margin: 41px 0 0;
+    max-width: 100%;
+    
+    @media (max-width: 991px) {
+      margin-top: 40px;
   }
 `;
 
 const LojaAplicativo = styled.div`
   display: flex;
   flex-direction: row;
+  cursor: pointer;
 
   img {
     width: 31%;
