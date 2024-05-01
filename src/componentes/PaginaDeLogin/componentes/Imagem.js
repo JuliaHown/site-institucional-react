@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import ImagemDaPagina from "../../../assets/Imagem-Login.svg";
+import ImagemDaPagina from "../../../assets/ImagemLogin.svg";
 
 function ImagemLogin() {
     return (
