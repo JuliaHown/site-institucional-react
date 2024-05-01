@@ -10,7 +10,7 @@ const Button = styled.button`
   align-items: center;
   border-radius: 13px;
   background-color: #50623a;
-  width: 20%;
+  width: 100%;
   color: #fff;
   text-align: center;
   letter-spacing: -0.28px;
