@@ -33,7 +33,12 @@ const ListItem = styled.li`
   }
 `;
 
+const LinkText = styled.p`
+  margin: 0;
+`;
+
 const textosOpcoes = ["Página inicial", "Sobre nós", "Contrate"];
+const links = ["/", "/sobrenos", "/contrate"];
 
 function Navbar() {
   return (
@@ -41,7 +46,9 @@ function Navbar() {
       <Links>
         {textosOpcoes.map((texto, index) => (
           <ListItem className={index === 0 ? "verde" : "preto"} key={index}>
-            <p>{texto}</p>
+            <a href={links[index]} style={{ textDecoration: "none", color: "inherit" }}>
+              <LinkText>{texto}</LinkText>
+            </a>
           </ListItem>
         ))}
       </Links>
