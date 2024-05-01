@@ -1,10 +1,11 @@
 import * as React from "react";
 import styled from "styled-components";
+import VoltarIcon from "../../../assets/icon-back.png";
 
 function VoltarParaHome() {
   return (
     <VoltarParaHomeWrapper href="/">
-      <VoltarParaHomeIcon src="https://cdn.builder.io/api/v1/image/assets/TEMP/535c204736268acf29c76b8db1a0122ffbcb8b208c33add60691586105df7ee5?apiKey=47f1cd04243243c1a2a2819ee899bf9a&" alt="Ícone de Voltar para o site" />
+      <VoltarParaHomeIcon src={VoltarIcon} alt="Ícone de Voltar para o site" />
       <VoltarParaHomeTexto>Voltar para o site</VoltarParaHomeTexto>
     </VoltarParaHomeWrapper>
   );
@@ -24,8 +25,8 @@ const VoltarParaHomeWrapper = styled.a`
 `;
 
 const VoltarParaHomeIcon = styled.img`
-  width: 24px;
-  height: 24px;
+  width: 12px;
+  height: 12px;
   object-fit: contain;
 `;
 
