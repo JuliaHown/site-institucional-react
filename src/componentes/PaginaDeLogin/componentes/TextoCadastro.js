@@ -23,15 +23,15 @@ const TextoCriacaoConta = styled.p`
   font-family: DM Sans, sans-serif;
   font-weight: 400;
   flex-grow: 1;
-  text-decoration: none;
 `;
 
 const LinkCriarConta = styled.a`
   color: #477240;
   text-align: right;
   font-family: DM Sans, sans-serif;
-  font-weight: 700;
+  font-weight: 600;
   cursor: pointer;
+  text-decoration: none; /* Removido o sublinhado */
 `;
 
 export default TextoParaCadastro;
