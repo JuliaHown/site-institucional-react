@@ -28,9 +28,8 @@ function PaginaLogin() {
               <Senha />
             </EmailContainer>
           </ContentWrapper>
+          <FazerLogin />
         </FormContainer>
-
-        <FazerLogin />
 
         <CriarContaWrapper>
           <CriarConta />
@@ -53,13 +52,13 @@ const Main = styled.main`
 
 const Section = styled.section`
   flex-direction: column;
-  margin-left: 13vw;
-  align-items: flex-start; /* alinha os componentes à esquerda */
+  align-items: center;
+  margin-left: 12.5vw;
 `;
 
 const VoltarWrapper = styled.div`
   position: absolute;
-  top: calc(10vh - 24px);
+  top: 7vh;
   left: 6vw;
 `;
 
@@ -72,27 +71,24 @@ const HeaderContainer = styled.section`
 const HeaderTitle = styled.h1`
   color: #183c18;
   letter-spacing: -0.72px;
-  font: 700 32px/1.56 "DM Sans", sans-serif;
+  font: 700 30px/156% DM Sans, sans-serif;
 `;
 
 const HeaderDescription = styled.p`
-  color: #6d7283;
+  color: var(--text-color, #6d7283);
   letter-spacing: -0.32px;
   margin-top: 15px;
-  font: 400 14px/1 "DM Sans", sans-serif;
+  font: 400 14px DM Sans, sans-serif;
 `;
 
 const FormContainer = styled.form`
   display: flex;
   flex-direction: column;
-  width: 100%;
+  max-width: 410px; 
   padding: 0 20px;
   font-size: 14px;
-  color: #477240;
-  font-weight: 500;
   letter-spacing: -0.28px;
   line-height: 100%;
-  margin-bottom: 6vh;
 `;
 
 const ContentWrapper = styled.div`
@@ -100,16 +96,20 @@ const ContentWrapper = styled.div`
   justify-content: center;
   align-items: center;
   margin-top: 20px;
-  margin-right: 6.7vw;
+  margin-bottom: 4vh;
 `;
 
 const EmailContainer = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%; /* Adicionado */
 `;
 
 const CriarContaWrapper = styled.div`
-  margin-top: 5vh;
+  margin-top: 37px;
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
 `;
 
 const ImagemWrapper = styled.div`
