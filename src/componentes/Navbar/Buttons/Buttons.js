@@ -1,43 +1,45 @@
+import * as React from "react";
 import styled from "styled-components";
 
-const ButtonContainer = styled.div`
-  display: flex;
-  margin: 3vh;
-  align-items: center;
-  margin-left: 10vw;
-  font-family: 'Montserrat', Arial, Helvetica;;
-`;
-
-const CadastrarButton = styled.button`
-  background: none;
-  border: none;
-  outline: none;
-  font-weight: 700;
-  margin-right: 2vw;
-  cursor: pointer;
-`;
-
-const LoginButton = styled.button`
-  background: var(--verde-musgo);
-  border: none;
-  outline: none;
-  color: #fff;
-  border-radius: 6px;
-  width: 6vw;
-  height: 3.5vh;
-  font-weight: 500;
-  cursor: pointer;
-`;
-
-const textoBotoes = ['Cadastrar', 'Fazer Login'];
-
-const Buttons = () => {
+function Header() {
   return (
-    <ButtonContainer>
-      <CadastrarButton>{textoBotoes[0]}</CadastrarButton>
-      <LoginButton>{textoBotoes[1]}</LoginButton>
-    </ButtonContainer>
+    <HeaderContainer>
+      <CadastrarButton href="/cadastrar">Cadastrar</CadastrarButton>
+      <LoginButton href="/login">Fazer Login</LoginButton>
+    </HeaderContainer>
   );
-};
+}
 
-export default Buttons;
+const HeaderContainer = styled.header`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  font-size: 13px;
+  margin-right: 5vw;
+  gap: 1.4vw;
+`;
+
+const CadastrarButton = styled.a`
+  color: #294b29;
+  font-family: Montserrat, sans-serif;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+`;
+
+const LoginButton = styled.a`
+  font-family: Open Sans, sans-serif;
+  border-radius: 6px;
+  width: auto;
+  background-color: #50623a;
+  color: #fff;
+  font-weight: 500;
+  padding: 10px 17px;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  text-decoration: none; /* Removido o sublinhado */
+`;
+
+export default Header;
