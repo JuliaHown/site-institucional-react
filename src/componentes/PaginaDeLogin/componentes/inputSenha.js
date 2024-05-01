@@ -59,17 +59,18 @@ const PasswordField = styled.div`
   border: 1px solid rgba(224, 229, 242, 1);
   color: var(--text-color, #6d7283);
   font-weight: 400;
+  background-color: #fff; /* Adicionado */
 `;
 
 const PasswordInput = styled.input`
   flex: 1;
   width: 100%;
-  max-width: 400px; /* largura máxima do campo de senha */
+  max-width: 400px; 
   border: none;
   font-family: DM Sans, sans-serif;
 
   @media (max-width: 768px) {
-    max-width: 100%; /* ajuste para tela menor */
+    max-width: 100%; 
   }
 `;
 
