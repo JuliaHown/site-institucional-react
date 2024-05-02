@@ -3,6 +3,9 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import GlobalStyle from "./GlobalStyle";
 import Login from "./componentes/PaginaDeLogin/PaginaLogin";
+import SobreNos from "./componentes/PaginaSobreNos/SobreNos";
+import Cadastrar from "./componentes/PaginaDeCadastro/PaginaCadastro";
+import ContrateNos from "./componentes/PaginaContrate/Contrate";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
@@ -14,7 +17,10 @@ ReactDOM.createRoot(root).render(
     <Router>
       <Routes>
         <Route path="/" element={<App />} />
+        <Route path="/sobrenos" element={<SobreNos />} />
+        <Route path="/contrate" element={<ContrateNos />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/cadastrar" element={<Cadastrar />} />
       </Routes>
     </Router>
   </React.StrictMode>
