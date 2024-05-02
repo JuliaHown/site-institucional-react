@@ -4,11 +4,17 @@ import styled from "styled-components";
 const footerData = [
   {
     title: "Empresa",
-    links: ["Sobre nós", "Contrate"],
+    links: [
+      { text: "Sobre nós", href: "/sobre" },
+      { text: "Contrate", href: "/contrate" },
+    ],
   },
   {
     title: "Contato",
-    links: ["(11) 1234-5678", "São Paulo, SP - Brasil"],
+    links: [
+      { text: "(11) 1234-5678", href: "#" },
+      { text: "São Paulo, SP - Brasil", href: "#" },
+    ],
   },
 ];
 
@@ -30,7 +36,9 @@ function Footer() {
             <FooterLinkSection key={index}>
               <FooterLinkTitle>{section.title}</FooterLinkTitle>
               {section.links.map((link, linkIndex) => (
-                <FooterLink key={linkIndex}>{link}</FooterLink>
+                <FooterLink key={linkIndex} href={link.href}>
+                  {link.text}
+                </FooterLink>
               ))}
             </FooterLinkSection>
           ))}
@@ -73,6 +81,7 @@ const FooterWrapper = styled.footer`
   flex-direction: column;
   align-items: center;
   gap: 2vh;
+  width: 100%;
 
   @media (max-width: 991px) {
     padding: 0 2vw;
@@ -145,6 +154,13 @@ const FooterLinkTitle = styled.h3`
 
 const FooterLink = styled.a`
   font-family: Montserrat, sans-serif;
+  cursor: pointer;
+  color: inherit;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 
 const AppDownload = styled.div`
@@ -191,6 +207,5 @@ const Copyright = styled.div`
   text-align: center;
   font: 500 1vh/154% Montserrat, sans-serif;
 `;
-
 
 export default Footer;
