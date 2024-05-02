@@ -1,8 +1,6 @@
 import styled from "styled-components";
 import GlobalStyle from "./GlobalStyle";
-import Logo from "./componentes/Logo/Logo";
-import Navigation from "./componentes/Navbar/Navbar";
-import CadastroLogin from "./componentes/Navbar/Buttons/Buttons";
+import Navigation from "./componentes/Navigation/Navigation";
 
 import PaginaPrincipal from "./componentes/LandingPage/PaginaPrincipal/PaginaPrincipal";
 import SobreNos from "./componentes/LandingPage/SobreNos/Sobrenos";
@@ -35,9 +33,7 @@ function App() {
 
       <AppContainer>
         <AppHeader>
-          <Logo />
           <Navigation />
-          <CadastroLogin />
         </AppHeader>
 
         <PaginaPrincipal />
