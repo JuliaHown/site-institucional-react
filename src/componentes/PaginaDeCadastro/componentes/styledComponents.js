@@ -15,6 +15,12 @@ const InputCadastro = styled.input`
   width: 100%;
   padding: 13px 24px;
 
+  ${({ cepPreenchido }) =>
+    cepPreenchido &&
+    `
+    background-color: #f0f0f4;
+  `}
+
   @media (max-width: 991px) {
     padding: 0 20px;
   }
@@ -26,6 +32,5 @@ export const Label = styled.label`
   font: 500 14px/100% "DM Sans", sans-serif;
   margin-bottom: 8px;
 `;
-
 
 export { CampoInputCadastro, InputCadastro };
