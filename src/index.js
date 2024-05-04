@@ -5,6 +5,7 @@ import GlobalStyle from "./GlobalStyle";
 import Login from "./componentes/PaginaDeLogin/PaginaLogin";
 import SobreNos from "./componentes/PaginaSobreNos/SobreNos";
 import Cadastrar from "./componentes/PaginaDeCadastro/PaginaCadastro";
+import CadastrarCondominio from "./componentes/PaginaDeCadastro/PaginaCondominio"
 import ContrateNos from "./componentes/PaginaContrate/Contrate";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -21,6 +22,7 @@ ReactDOM.createRoot(root).render(
         <Route path="/contrate" element={<ContrateNos />} />
         <Route path="/login" element={<Login />} />
         <Route path="/cadastrar" element={<Cadastrar />} />
+        <Route path="/cadastrarcondominio" element={<CadastrarCondominio />} />
       </Routes>
     </Router>
   </React.StrictMode>
