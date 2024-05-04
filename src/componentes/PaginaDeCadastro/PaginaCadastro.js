@@ -5,7 +5,15 @@ import Formulario from "./componentes/CadastroFormulario";
 import VoltarHome from "../PaginaDeLogin/componentes/btnVoltarHome";
 import ImagemCadastro from "./componentes/Imagem";
 
+import { useNavigate } from "react-router-dom";
+
 function PaginaCadastrar() {
+  const navigate = useNavigate();
+
+  const handleCadastrarClick = () => {
+    navigate("/cadastrarcondominio");
+  };
+
   return (
     <Main>
       <Container>
@@ -21,7 +29,7 @@ function PaginaCadastrar() {
         </Header>
         <Formulario />
         <BotaoCadastrar>
-          <Botao>Fazer cadastro</Botao>
+          <Botao onClick={handleCadastrarClick}>Fazer cadastro</Botao>
         </BotaoCadastrar>
       </Container>
       <ImagemContainer>
