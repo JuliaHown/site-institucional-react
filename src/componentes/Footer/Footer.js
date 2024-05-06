@@ -5,7 +5,7 @@ const footerData = [
   {
     title: "Empresa",
     links: [
-      { text: "Sobre nós", href: "/sobre" },
+      { text: "Sobre nós", href: "/sobrenos" },
       { text: "Contrate", href: "/contrate" },
     ],
   },

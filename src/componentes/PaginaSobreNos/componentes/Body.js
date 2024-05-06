@@ -3,6 +3,10 @@ import styled from "styled-components";
 
 import Funcionalidades from "./CardsBody";
 
+const redirecionarPagina = () => {
+  window.location.href = "/contrate";
+};
+
 function ConteudoBody() {
   return (
     <Pagina>
@@ -31,7 +35,7 @@ function ConteudoBody() {
           Não perca mais tempo e transforme <br />a organização do seu
           condomínio
         </TituloPrincipal>
-        <BotaoPrincipal href="/contrate">Contrate agora</BotaoPrincipal>
+        <BotaoPrincipal onClick={redirecionarPagina}>Contrate agora</BotaoPrincipal>
       </ContainerPrincipal>
     </Pagina>
   );
