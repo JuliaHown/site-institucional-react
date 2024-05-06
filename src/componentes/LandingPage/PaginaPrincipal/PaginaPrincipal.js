@@ -2,6 +2,34 @@ import styled from "styled-components";
 import BotaoSaiba from "./ButtonSaibaMais/Button";
 import ImagemUm from "./Imagem/Imagem";
 
+const redirecionarPagina = () => {
+  window.location.href = "/sobrenos";
+};
+
+function PaginaPrincipal() {
+  return (
+    <Container>
+      <LeftContainer>
+        <Titulo>
+          O seu parceiro na <br />
+          gestão de encomendas
+        </Titulo>
+        <Texto>
+          Oferecemos uma solução tecnológica inovadora para simplificar a gestão
+          de encomendas em condomínios, visando proporcionar eficiência e
+          comodidade aos moradores.
+        </Texto>
+        <BotaoSaiba onClick={redirecionarPagina}>Saiba mais</BotaoSaiba>
+      </LeftContainer>
+
+      <ImagemContainer>
+        <ImagemUm></ImagemUm>
+      </ImagemContainer>
+
+    </Container>
+  );
+}
+
 const Container = styled.section`
   justify-content: center;
   display: flex;
@@ -47,29 +75,5 @@ const Texto = styled.span`
   line-height: 1.5;
   margin-bottom: 5vh;
 `;
-
-function PaginaPrincipal() {
-  return (
-    <Container>
-      <LeftContainer>
-        <Titulo>
-          O seu parceiro na <br />
-          gestão de encomendas
-        </Titulo>
-        <Texto>
-          Oferecemos uma solução tecnológica inovadora para simplificar a gestão
-          de encomendas em condomínios, visando proporcionar eficiência e
-          comodidade aos moradores.
-        </Texto>
-        <BotaoSaiba>Saiba mais</BotaoSaiba>
-      </LeftContainer>
-
-      <ImagemContainer>
-        <ImagemUm></ImagemUm>
-      </ImagemContainer>
-
-    </Container>
-  );
-}
 
 export default PaginaPrincipal;

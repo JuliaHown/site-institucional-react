@@ -41,6 +41,10 @@ const Descricao = styled.p`
   line-height: 1.5;
 `;
 
+const redirecionarPagina = () => {
+  window.location.href = "/contrate";
+};
+
 function sobreNos() {
   return (
     <Container>
@@ -58,7 +62,7 @@ function sobreNos() {
           para lidar com o fluxo de encomendas.
         </Descricao>
       </TextosContainer>
-      <ButtonContratar>Contrate Já</ButtonContratar>
+      <ButtonContratar onClick={redirecionarPagina}>Contrate Já</ButtonContratar>
     </Container>
   );
 }
