@@ -1,16 +1,23 @@
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import axios from "axios";
 import Style from "../../TelasDoCliente/ClientStyle";
 import MenuLateral from "./Componentes/Sidebar";
-import Navigation from "./Componentes/Navigation"
 
-const CampoInput = ({ label, placeholder }) => (
+const CampoInput = ({ label, placeholder, value, onChange }) => (
   <div>
     <Label>{label}</Label>
-    <Input placeholder={placeholder} />
+    <Input
+      placeholder={placeholder}
+      value={value}
+      onChange={onChange}
+    />
   </div>
 );
 
-const Botao = ({ children }) => <BotaoEstilizado>{children}</BotaoEstilizado>;
+const Botao = ({ children, onClick }) => (
+  <BotaoEstilizado onClick={onClick}>{children}</BotaoEstilizado>
+);
 
 const SecaoInformacao = ({ titulo, texto, textoBotao }) => (
   <ContainerInfo>
@@ -21,35 +28,102 @@ const SecaoInformacao = ({ titulo, texto, textoBotao }) => (
 );
 
 const CadastroEncomendas = () => {
+  const [nomeDestinatario, setNomeDestinatario] = useState("");
+  const [blocoDestinatario, setBlocoDestinatario] = useState("");
+  const [numeroApartamento, setNumeroApartamento] = useState("");
+  const [dataRecebimento, setDataRecebimento] = useState("");
+  const [dataEntrega, setDataEntrega] = useState("");
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    // Atualizar data e hora de recebimento automaticamente
+    const currentDate = new Date();
+    setDataRecebimento(formatDate(currentDate));
+    
+    // Atualizar data e hora de entrega automaticamente
+    const nextDay = new Date(currentDate);
+    nextDay.setDate(nextDay.getDate() + 1);
+    setDataEntrega(formatDate(nextDay));
+  }, []);
+
+  const formatDate = (date) => {
+    const day = String(date.getDate()).padStart(2, "0");
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const year = date.getFullYear();
+    const hours = String(date.getHours()).padStart(2, "0");
+    const minutes = String(date.getMinutes()).padStart(2, "0");
+    const seconds = String(date.getSeconds()).padStart(2, "0");
+    return `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
+  };
+
+  // Fazer requisição //
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await axios.post("http://localhost:8081/entregas", {
+        nomeDestinatario,
+        blocoDestinatario,
+        numeroApartamento,
+        dataRecebimento,
+        dataEntrega,
+      });
+
+      if (response.status === 201) {
+        alert("Encomenda cadastrada com sucesso!");
+        setNomeDestinatario("");
+        setBlocoDestinatario("");
+        setNumeroApartamento("");
+        setDataRecebimento("");
+        setDataEntrega("");
+      }
+    } catch (error) {
+      setError("Erro ao cadastrar encomenda. Por favor, tente novamente.");
+      console.error("Erro ao cadastrar encomenda:", error);
+      alert("Erro ao cadastrar encomenda. Por favor, tente novamente.");
+    }
+  };
+
   return (
     <>
       <Style />
       <Container>
         <MenuLateral />
         <Content>
-          <Esquerda>
+          <Esquerda onSubmit={handleSubmit}>
             <Titulo>Cadastrar Encomendas</Titulo>
             <CampoInput
               label="Nome do destinatário*"
               placeholder="Digite o nome do morador"
+              value={nomeDestinatario}
+              onChange={(e) => setNomeDestinatario(e.target.value)}
             />
             <CampoInput
-              label="Bloco do destinatário*"
+              label="Bloco do destinatário"
               placeholder="Digite o bloco do destinatário"
+              value={blocoDestinatario}
+              onChange={(e) => setBlocoDestinatario(e.target.value)}
             />
             <CampoInput
               label="Número do apartamento*"
               placeholder="Digite o número do apartamento"
+              value={numeroApartamento}
+              onChange={(e) => setNumeroApartamento(e.target.value)}
             />
             <CampoInput
-              label="Data de Recebimento"
-              placeholder="24/04/2024 18:54:23"
+              label="Data de Recebimento*"
+              placeholder="DD/MM/AAAA HH:MM:SS"
+              value={dataRecebimento}
+              onChange={(e) => setDataRecebimento(e.target.value)}
             />
             <CampoInput
               label="Data de entrega ao destinatário"
-              placeholder="25/04/2024 14:08:57"
+              placeholder="DD/MM/AAAA HH:MM:SS"
+              value={dataEntrega}
+              onChange={(e) => setDataEntrega(e.target.value)}
             />
             <Botao>Cadastrar a encomenda</Botao>
+            {error && <MensagemErro>{error}</MensagemErro>}
           </Esquerda>
           <Divider />
           <Direita>
@@ -78,26 +152,25 @@ const Content = styled.div`
   padding: 90px 80px;
   display: flex;
   gap: 40px;
-  justify-content: center; 
-  align-items: center; 
+  justify-content: center;
+  align-items: center;
   margin: auto;
   margin-right: 4.5vw;
   margin-left: 6vw;
 `;
 
-
-const Esquerda = styled.div`
+const Esquerda = styled.form`
   display: flex;
   flex-direction: column;
   gap: 16px;
-  flex: 1; 
+  flex: 1;
 `;
 
 const Direita = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
-  flex: 1; 
+  flex: 1;
 `;
 
 const Titulo = styled.div`
@@ -130,6 +203,7 @@ const BotaoEstilizado = styled.button`
   width: 60%;
   margin-top: 3vh;
   margin-left: 2vw;
+  cursor: pointer;
 `;
 
 const ContainerInfo = styled.div`
@@ -156,6 +230,12 @@ const Divider = styled.div`
   height: 100%;
   background-color: #000000;
   margin: 0 10px;
+`;
+
+const MensagemErro = styled.p`
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
 `;
 
 export default CadastroEncomendas;
