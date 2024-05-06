@@ -1,17 +1,17 @@
 import styled from "styled-components";
 import Voltar from "./componentes/btnVoltarHome";
-import FazerLogin from "./componentes/FazerLogin";
 import CriarConta from "./componentes/TextoCadastro";
 import ImagemPagina from "../PaginaDeLogin/componentes/Imagem";
-import Formulario from "./componentes/FormularioLogin"
+import Formulario from "./componentes/FormularioLogin";
 
 function PaginaLogin() {
+
   return (
     <Main>
       <VoltarWrapper>
         <Voltar />
       </VoltarWrapper>
-      
+
       <Section>
         <HeaderContainer>
           <HeaderTitle>Faça o seu login</HeaderTitle>
@@ -22,9 +22,8 @@ function PaginaLogin() {
 
         <FormContainer>
           <ContentWrapper>
-            <Formulario/>
+            <Formulario />
           </ContentWrapper>
-          <FazerLogin />
         </FormContainer>
 
         <CriarContaWrapper>
@@ -80,7 +79,7 @@ const HeaderDescription = styled.p`
 const FormContainer = styled.form`
   display: flex;
   flex-direction: column;
-  max-width: 410px; 
+  max-width: 410px;
   padding: 0 20px;
   font-size: 14px;
   letter-spacing: -0.28px;
@@ -97,9 +96,9 @@ const ContentWrapper = styled.div`
 
 const CriarContaWrapper = styled.div`
   margin-top: 37px;
-  display: flex; 
-  align-items: center; 
-  justify-content: center; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const ImagemWrapper = styled.div`

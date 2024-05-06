@@ -5,14 +5,9 @@ import Formulario from "./componentes/CadastroFormulario";
 import VoltarHome from "../PaginaDeLogin/componentes/btnVoltarHome";
 import ImagemCadastro from "./componentes/Imagem";
 
-import { useNavigate } from "react-router-dom";
 
 function PaginaCadastrar() {
-  const navigate = useNavigate();
 
-  const handleCadastrarClick = () => {
-    navigate("/cadastrarcondominio");
-  };
 
   return (
     <Main>
@@ -28,9 +23,6 @@ function PaginaCadastrar() {
           </Subtitulo>
         </Header>
         <Formulario />
-        <BotaoCadastrar>
-          <Botao onClick={handleCadastrarClick}>Fazer cadastro</Botao>
-        </BotaoCadastrar>
       </Container>
       <ImagemContainer>
         <ImagemCadastro />
@@ -76,34 +68,6 @@ const Subtitulo = styled.h2`
   color: var(--text-color, #6d7283);
   font: 400 14px/16px "DM Sans", sans-serif;
   letter-spacing: -0.32px;
-`;
-
-const BotaoCadastrar = styled.div`
-  margin-top: 3vh;
-  margin-left: 12vw;
-`;
-
-const Botao = styled.button`
-  border-radius: 16px;
-  background-color: #294b29;
-  color: #fff;
-  text-align: center;
-  letter-spacing: -0.28px;
-  padding: 16px 8px;
-  font: 500 14px/100% "DM Sans", sans-serif;
-  border: none;
-  cursor: pointer;
-  width: 29vw;
-
-  transition: background-color 0.3s;
-
-  &:hover {
-    background-color: #123312;
-  }
-
-  @media (max-width: 991px) {
-    padding: 0 20px;
-  }
 `;
 
 const ImagemContainer = styled.div`
