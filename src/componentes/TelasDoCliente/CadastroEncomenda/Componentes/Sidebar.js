@@ -1,5 +1,8 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import axios from "axios";
+
+import Logo from "../../../../assets/LogoPadrao.svg"
 
 const PageContainer = styled.div`
   display: flex;
@@ -19,7 +22,7 @@ const Sidebar = styled.div`
 `;
 
 const Imagem = styled.img`
-  width: 91px;
+  width: 160px;
 `;
 
 const NomeUsuario = styled.div`
@@ -49,11 +52,29 @@ const Link = styled.div`
 `;
 
 function MenuUsuario() {
+  const [nome, setNome] = useState("");
+  const [email, setEmail] = useState("");
+
+  useEffect(() => {
+    axios.get("sua-url-aqui")
+      .then(response => {
+        setNome(response.data.nome);
+        setEmail(response.data.email);
+      })
+      .catch(error => {
+        console.error("Erro ao buscar usuário:", error);
+      });
+  }, []);
+
   return (
     <PageContainer>
       <Sidebar>
-        <NomeUsuario>Usuario</NomeUsuario>
-        <EmailUsuario>usuario@email.com</EmailUsuario>
+        <Imagem
+          src={Logo}
+          alt="Logo da empresa Zé Porteiro"
+        />
+        <NomeUsuario>{nome}</NomeUsuario>
+        <EmailUsuario>{email}</EmailUsuario>
         <Links>
           <Link onClick={() => window.location.href = '/pagina-inicial'}>
             Página Inicial
