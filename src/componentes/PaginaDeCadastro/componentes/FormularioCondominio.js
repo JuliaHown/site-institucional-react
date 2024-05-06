@@ -25,14 +25,12 @@ function PaginaCondominio() {
             setLogradouro(data.logradouro);
             setBairro(data.bairro);
             setCidade(data.localidade);
-            setUf(data.uf);
             setError("");
           } else {
             setError("CEP não encontrado");
             setLogradouro("");
             setBairro("");
             setCidade("");
-            setUf("");
           }
         })
         .catch((error) => {
@@ -54,12 +52,12 @@ function PaginaCondominio() {
     setCep(formattedCep);
   };
 
-  const isCepFilledAutomatically = cep.length === 8 && logradouro && bairro && cidade && uf;
+  const isCepFilledAutomatically = cep.length === 8 && logradouro && bairro && cidade;
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post("http://localhost:8081/clientes", {
+      const response = await axios.post("http://localhost:8080/clientes", {
         nome: event.target.nomeInput.value,
         cep,
         logradouro,
@@ -115,6 +113,16 @@ function PaginaCondominio() {
             </CampoInputCadastro>
 
             <CampoInputCadastro>
+              <Label>Número</Label>
+              <InputCadastro
+                type="text"
+                value={uf}
+                readOnly
+                placeholder="Número"
+              />
+            </CampoInputCadastro>
+
+            <CampoInputCadastro>
               <Label>Bairro</Label>
               <InputCadastro
                 type="text"
@@ -134,15 +142,6 @@ function PaginaCondominio() {
               />
             </CampoInputCadastro>
 
-            <CampoInputCadastro>
-              <Label>UF</Label>
-              <InputCadastro
-                type="text"
-                value={uf}
-                readOnly
-                placeholder="UF"
-              />
-            </CampoInputCadastro>
           </>
         )}
 
