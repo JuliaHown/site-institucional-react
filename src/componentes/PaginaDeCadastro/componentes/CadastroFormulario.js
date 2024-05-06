@@ -48,7 +48,7 @@ function FormularioCadastro() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post("http://localhost:8081/clientes", {
+      const response = await axios.post("http://localhost:8080/clientes", {
         email,
         telefone,
         senha,

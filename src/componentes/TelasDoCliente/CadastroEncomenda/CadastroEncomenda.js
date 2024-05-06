@@ -61,7 +61,7 @@ const CadastroEncomendas = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post("http://localhost:8081/entregas", {
+      const response = await axios.post("http://localhost:8080/entregas", {
         nomeDestinatario,
         blocoDestinatario,
         numeroApartamento,
