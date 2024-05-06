@@ -57,7 +57,7 @@ function PaginaCondominio() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post("http://localhost:8080/clientes", {
+      const response = await axios.post("http://localhost:8080/condominios", {
         nome: event.target.nomeInput.value,
         cep,
         logradouro,
