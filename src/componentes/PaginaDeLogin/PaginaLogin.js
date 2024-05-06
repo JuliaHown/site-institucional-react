@@ -1,10 +1,9 @@
 import styled from "styled-components";
-import Email from "./componentes/InputEmail";
-import Senha from "./componentes/inputSenha";
 import Voltar from "./componentes/btnVoltarHome";
 import FazerLogin from "./componentes/FazerLogin";
 import CriarConta from "./componentes/TextoCadastro";
 import ImagemPagina from "../PaginaDeLogin/componentes/Imagem";
+import Formulario from "./componentes/FormularioLogin"
 
 function PaginaLogin() {
   return (
@@ -23,10 +22,7 @@ function PaginaLogin() {
 
         <FormContainer>
           <ContentWrapper>
-            <EmailContainer>
-              <Email />
-              <Senha />
-            </EmailContainer>
+            <Formulario/>
           </ContentWrapper>
           <FazerLogin />
         </FormContainer>
@@ -97,12 +93,6 @@ const ContentWrapper = styled.div`
   align-items: center;
   margin-top: 20px;
   margin-bottom: 4vh;
-`;
-
-const EmailContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%; /* Adicionado */
 `;
 
 const CriarContaWrapper = styled.div`
