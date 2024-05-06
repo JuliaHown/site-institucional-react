@@ -1,29 +1,17 @@
 import React, { useState } from "react";
-import { CampoInputCadastro, InputCadastro, Label } from "./styledComponents";
 import styled from "styled-components";
+import axios from "axios";
+import { CampoInputCadastro, InputCadastro, Label } from "./styledComponents";
+import { useNavigate } from "react-router-dom";
 
-const Formulario = styled.div`
-  margin-left: 12vw;
-`;
-
-const ErrorPopup = styled.div`
-  position: absolute;
-  top: calc(100% + 5px);
-  left: 0;
-  background-color: #ff4d4f;
-  color: #fff;
-  padding: 5px 10px;
-  border-radius: 5px;
-  display: ${({ show }) => (show ? "block" : "none")};
-`;
-
-function FormularioCadastro() {
+function PaginaCondominio() {
   const [cep, setCep] = useState("");
   const [logradouro, setLogradouro] = useState("");
   const [bairro, setBairro] = useState("");
   const [cidade, setCidade] = useState("");
   const [uf, setUf] = useState("");
   const [error, setError] = useState("");
+  const navigate = useNavigate(); 
 
   const handleCepChange = (event) => {
     const formattedCep = event.target.value.replace(/\D/g, "");
@@ -68,87 +56,138 @@ function FormularioCadastro() {
 
   const isCepFilledAutomatically = cep.length === 8 && logradouro && bairro && cidade && uf;
 
-  console.log("Error:", error);
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await axios.post("http://localhost:8081/clientes", {
+        nome: event.target.nomeInput.value,
+        cep,
+        logradouro,
+        bairro,
+        cidade,
+        uf
+      });
+
+      if (response.status === 201) {
+        navigate("/login");
+      }
+    } catch (error) {
+      console.error("Erro ao cadastrar condomínio:", error);
+    }
+  };
 
   return (
     <Formulario>
-      <CampoInputCadastro>
-        <Label htmlFor="nomeInput">Nome do Condomínio</Label>
-        <InputCadastro
-          type="text"
-          id="nomeInput"
-          placeholder="Digite o nome do condomínio"
-        />
-      </CampoInputCadastro>
+      <form onSubmit={handleSubmit}>
+        <CampoInputCadastro>
+          <Label htmlFor="nomeInput">Nome do Condomínio</Label>
+          <InputCadastro
+            type="text"
+            id="nomeInput"
+            placeholder="Digite o nome do condomínio"
+          />
+        </CampoInputCadastro>
 
-      <CampoInputCadastro>
-        <Label htmlFor="cepInput">CEP</Label>
-        <InputCadastro
-          type="text"
-          id="cepInput"
-          placeholder="Digite o CEP"
-          value={cep}
-          onChange={handleCepChange}
-          maxLength="9"
-          cepPreenchido={isCepFilledAutomatically} 
-        />
-        <ErrorPopup show={error !== ""}>{error}</ErrorPopup>
-      </CampoInputCadastro>
+        <CampoInputCadastro>
+          <Label htmlFor="cepInput">CEP</Label>
+          <InputCadastro
+            type="text"
+            id="cepInput"
+            placeholder="Digite o CEP"
+            value={cep}
+            onChange={handleCepChange}
+            maxLength="9"
+            cepPreenchido={isCepFilledAutomatically} 
+          />
+          <ErrorPopup show={error !== ""}>{error}</ErrorPopup>
+        </CampoInputCadastro>
 
-      {isCepFilledAutomatically && (
-        <>
-          <CampoInputCadastro>
-            <Label>Logradouro</Label>
-            <InputCadastro
-              type="text"
-              value={logradouro}
-              readOnly
-              placeholder="Logradouro"
-            />
-          </CampoInputCadastro>
+        {isCepFilledAutomatically && (
+          <>
+            <CampoInputCadastro>
+              <Label>Logradouro</Label>
+              <InputCadastro
+                type="text"
+                value={logradouro}
+                onChange={(e) => setLogradouro(e.target.value)}
+                placeholder="Logradouro"
+              />
+            </CampoInputCadastro>
 
-          <CampoInputCadastro>
-            <Label>Complemento</Label>
-            <InputCadastro
-              type="text"
-              id="complementoInput"
-              placeholder="Ex: Bloco, Lado"
-            />
-          </CampoInputCadastro>
+            <CampoInputCadastro>
+              <Label>Bairro</Label>
+              <InputCadastro
+                type="text"
+                value={bairro}
+                readOnly
+                placeholder="Bairro"
+              />
+            </CampoInputCadastro>
 
-          <CampoInputCadastro>
-            <Label>Bairro</Label>
-            <InputCadastro
-              type="text"
-              value={bairro}
-              readOnly
-              placeholder="Bairro"
-            />
-          </CampoInputCadastro>
+            <CampoInputCadastro>
+              <Label>Cidade</Label>
+              <InputCadastro
+                type="text"
+                value={cidade}
+                readOnly
+                placeholder="Cidade"
+              />
+            </CampoInputCadastro>
 
-          <CampoInputCadastro>
-            <Label>Cidade</Label>
-            <InputCadastro
-              type="text"
-              value={cidade}
-              readOnly
-              placeholder="Cidade"
-            />
-          </CampoInputCadastro>
+            <CampoInputCadastro>
+              <Label>UF</Label>
+              <InputCadastro
+                type="text"
+                value={uf}
+                readOnly
+                placeholder="UF"
+              />
+            </CampoInputCadastro>
+          </>
+        )}
 
-          <CampoInputCadastro>
-            <Label>UF</Label>
-            <InputCadastro
-              type="text"
-              value={uf}
-              readOnly
-              placeholder="UF"
-            />
-          </CampoInputCadastro>
-        </>
-      )}
+        <Botao type="submit">Cadastrar Condomínio</Botao>
+      </form>
     </Formulario>
   );
 }
 
-export default FormularioCadastro;
+const Formulario = styled.div`
+  margin-left: 12vw;
+`;
+
+const ErrorPopup = styled.div`
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 0;
+  background-color: #ff4d4f;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  display: ${({ show }) => (show ? "block" : "none")};
+`;
+
+const Botao = styled.button`
+  border-radius: 16px;
+  background-color: #294b29;
+  color: #fff;
+  text-align: center;
+  letter-spacing: -0.28px;
+  padding: 16px 8px;
+  font: 500 14px/100% "DM Sans", sans-serif;
+  border: none;
+  cursor: pointer;
+  width: 29vw;
+
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #123312;
+  }
+
+  @media (max-width: 991px) {
+    padding: 0 20px;
+  }
+`;
+
+export default PaginaCondominio;

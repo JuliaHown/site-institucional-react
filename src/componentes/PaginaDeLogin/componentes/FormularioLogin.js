@@ -1,12 +1,14 @@
+import React, { useState } from "react";
 import styled from "styled-components";
-import { useState } from "react";
+import axios from "axios";
 
-const FormularioLogin = () => {
+const FormularioLogin = ({ onLoginSuccess }) => {
   const [email, setEmail] = useState("");
   const [isValidEmail, setIsValidEmail] = useState(true);
   const [touchedEmail, setTouchedEmail] = useState(false);
   const [senha, setSenha] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState(null);
 
   const handleChangeEmail = (event) => {
     const novoEmail = event.target.value;
@@ -33,8 +35,25 @@ const FormularioLogin = () => {
 
   const isInvalidEmail = !isValidEmail && touchedEmail;
 
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await axios.post("http://localhost:8081/clientes/login", {
+        email,
+        senha,
+      });
+
+      if (response.status === 200) {
+        onLoginSuccess("/cadastrarencomenda");
+      }
+    } catch (error) {
+      console.error("Erro ao cadastrar usuário:", error);
+      setError("Ocorreu um erro ao fazer login. Por favor, tente novamente.");
+    }
+  };
+
   return (
-    <FormWrapper>
+    <FormWrapper onSubmit={handleSubmit}>
       <EmailInputWrapper>
         <InputLabel>
           Email<RequiredIndicator>*</RequiredIndicator>
@@ -68,11 +87,13 @@ const FormularioLogin = () => {
           />
         </PasswordField>
       </SenhaInputWrapper>
+      {error && <MensagemErro>{error}</MensagemErro>}
+      <Botao type="submit">Login</Botao>
     </FormWrapper>
   );
 };
 
-const FormWrapper = styled.div`
+const FormWrapper = styled.form`
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -151,6 +172,29 @@ const MensagemErro = styled.p`
   color: red;
   font-size: 14px;
   margin-top: 5px;
+`;
+
+const Botao = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 13px;
+  background-color: #50623a;
+  width: 100%;
+  color: #fff;
+  text-align: center;
+  letter-spacing: -0.28px;
+  padding: 20px 8px;
+  font: 700 14px/100% DM Sans, sans-serif;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  white-space: nowrap;
+  margin-top: 25px;
+
+  &:hover {
+    background-color: #3c4d2b;
+  }
 `;
 
 export default FormularioLogin;
