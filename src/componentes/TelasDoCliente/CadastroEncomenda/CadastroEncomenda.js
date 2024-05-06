@@ -142,7 +142,7 @@ const CadastroEncomendas = () => {
 const Container = styled.div`
   display: flex;
   justify-content: center;
-  align-items: flex-start; /* Alinhar itens no topo */
+  align-items: flex-start; 
   height: 100vh;
 `;
 
