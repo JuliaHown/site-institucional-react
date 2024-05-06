@@ -25,13 +25,11 @@ const Imagem = styled.img`
 const NomeUsuario = styled.div`
   margin-top: 17px;
   font: 800 28px/109% Montserrat, sans-serif;
-  cursor: pointer;
 `;
 
 const EmailUsuario = styled.div`
   margin-top: 4px;
   font: 13px/169% Open Sans, sans-serif;
-  cursor: pointer;
 `;
 
 const Links = styled.div`
@@ -54,17 +52,8 @@ function MenuUsuario() {
   return (
     <PageContainer>
       <Sidebar>
-        <Imagem
-          loading="lazy"
-          src="https://cdn.builder.io/api/v1/image/assets/TEMP/e830859445ae353af84e3edd14560dd2f6e58c863763844b7539fdb2e62aa1de?apiKey=47f1cd04243243c1a2a2819ee899bf9a&width=91"
-          alt="Imagem do usuário"
-        />
-        <NomeUsuario onClick={() => window.location.href = '/pagina-inicial'}>
-          Usuario
-        </NomeUsuario>
-        <EmailUsuario onClick={() => window.location.href = '/email'}>
-          usuario@email.com
-        </EmailUsuario>
+        <NomeUsuario>Usuario</NomeUsuario>
+        <EmailUsuario>usuario@email.com</EmailUsuario>
         <Links>
           <Link onClick={() => window.location.href = '/pagina-inicial'}>
             Página Inicial
@@ -80,6 +69,9 @@ function MenuUsuario() {
           </Link>
           <Link onClick={() => window.location.href = '/porteiros'}>
             Porteiros
+          </Link>
+          <Link onClick={() => window.location.href = '/login'}>
+            SAIR
           </Link>
         </Links>
       </Sidebar>
