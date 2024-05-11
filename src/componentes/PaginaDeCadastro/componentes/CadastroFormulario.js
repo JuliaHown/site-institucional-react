@@ -3,6 +3,8 @@ import { CampoInputCadastro, InputCadastro, Label } from "./styledComponents";
 import styled from "styled-components";
 import axios from "axios";
 
+import { validarEmail, formatarTelefone } from "./Validacoes";
+
 function FormularioCadastro() {
   const [mostrarSenha, setMostrarSenha] = useState(false);
   const [email, setEmail] = useState("");
@@ -15,11 +17,6 @@ function FormularioCadastro() {
     setMostrarSenha((prevState) => !prevState);
   };
 
-  const validarEmail = (email) => {
-    const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return regexEmail.test(email);
-  };
-
   const handleChangeEmail = (event) => {
     const novoEmail = event.target.value;
     setEmail(novoEmail);
@@ -29,14 +26,6 @@ function FormularioCadastro() {
     setEmailValido(validarEmail(email));
   };
 
-  const formatarTelefone = (telefone) => {
-    const apenasNumeros = telefone.replace(/[^\d]/g, "");
-    let telefoneFormatado = apenasNumeros.replace(
-      /(\d{2})(\d{5})(\d{4})/,
-      "($1) $2-$3"
-    );
-    return telefoneFormatado;
-  };
 
   const handleChangeTelefone = (event) => {
     const novoTelefone = event.target.value;

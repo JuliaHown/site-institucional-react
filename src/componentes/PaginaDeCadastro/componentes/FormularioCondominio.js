@@ -126,7 +126,7 @@ function PaginaCondominio() {
     <Formulario>
       <form onSubmit={handleSubmit}>
         <CampoInputCadastro>
-          <Label htmlFor="nomeInput">Nome do Condomínio</Label>
+          <Label htmlFor="nomeInput">Nome do Condomínio*</Label>
           <InputCadastro
             type="text"
             id="nomeInput"

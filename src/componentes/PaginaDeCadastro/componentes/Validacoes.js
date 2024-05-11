@@ -15,3 +15,17 @@ export const validarCEP = (cep) => {
     return valor.trim() !== "";
   };
   
+  export const validarEmail = (email) => {
+    const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regexEmail.test(email);
+  };
+
+
+  export const formatarTelefone = (telefone) => {
+    const apenasNumeros = telefone.replace(/[^\d]/g, "");
+    let telefoneFormatado = apenasNumeros.replace(
+      /(\d{2})(\d{5})(\d{4})/,
+      "($1) $2-$3"
+    );
+    return telefoneFormatado;
+  };

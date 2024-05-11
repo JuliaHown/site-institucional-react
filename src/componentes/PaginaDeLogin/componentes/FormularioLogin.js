@@ -29,8 +29,8 @@ const FormularioLogin = ({ onLoginSuccess }) => {
   };
 
   const validarEmail = (valor) => {
-    const emailValido = valor.includes("@") && valor.includes(".com");
-    setIsValidEmail(emailValido || valor === "");
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    setIsValidEmail(regex.test(valor));
   };
 
   const isInvalidEmail = !isValidEmail && touchedEmail;
@@ -47,7 +47,7 @@ const FormularioLogin = ({ onLoginSuccess }) => {
         onLoginSuccess("/cadastrarencomenda");
       }
     } catch (error) {
-      console.error("Erro ao cadastrar usuário:", error);
+      console.error("Erro ao fazer login:", error);
       setError("Ocorreu um erro ao fazer login. Por favor, tente novamente.");
     }
   };
