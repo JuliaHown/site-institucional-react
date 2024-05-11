@@ -1,22 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import { CampoInputCadastro, InputCadastro, Label } from "./styledComponents";
 import { useNavigate } from "react-router-dom";
+import { validarCEP, validarNumero, validarPreenchido } from "./Validacoes";
 
 function PaginaCondominio() {
   const [cep, setCep] = useState("");
   const [logradouro, setLogradouro] = useState("");
+  const [numero, setNumero] = useState("");
   const [bairro, setBairro] = useState("");
   const [cidade, setCidade] = useState("");
-  const [uf, setUf] = useState("");
+  const [nome, setNome] = useState("");
   const [error, setError] = useState("");
-  const navigate = useNavigate(); 
+  const [loading, setLoading] = useState(true);
+  const [isFormVisible, setIsFormVisible] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    setLoading(false);
+  }, []);
 
   const handleCepChange = (event) => {
     const formattedCep = event.target.value.replace(/\D/g, "");
 
-    if (formattedCep.length === 8) {
+    if (validarCEP(formattedCep)) {
       fetch(`https://viacep.com.br/ws/${formattedCep}/json/`)
         .then((response) => response.json())
         .then((data) => {
@@ -25,12 +33,14 @@ function PaginaCondominio() {
             setLogradouro(data.logradouro);
             setBairro(data.bairro);
             setCidade(data.localidade);
+            setIsFormVisible(true);
             setError("");
           } else {
             setError("CEP não encontrado");
             setLogradouro("");
             setBairro("");
             setCidade("");
+            setIsFormVisible(false);
           }
         })
         .catch((error) => {
@@ -39,31 +49,62 @@ function PaginaCondominio() {
           setLogradouro("");
           setBairro("");
           setCidade("");
-          setUf("");
+          setIsFormVisible(false);
         });
     } else {
-      setError("");
+      setError("CEP inválido");
       setLogradouro("");
       setBairro("");
       setCidade("");
-      setUf("");
+      setIsFormVisible(false);
     }
 
     setCep(formattedCep);
   };
 
-  const isCepFilledAutomatically = cep.length === 8 && logradouro && bairro && cidade;
+  const handleNumeroChange = (event) => {
+    const numeroInput = event.target.value;
+    if (!validarNumero(numeroInput)) {
+      setError("Apenas números são permitidos");
+      setNumero(""); // Definir como string vazia se a entrada for inválida
+    } else {
+      setError("");
+      setNumero(numeroInput);
+    }
+  };
+
+  const handleNomeChange = (event) => {
+    const nomeInput = event.target.value;
+    if (!/^[\w\s\u00C0-\u00FF]+$/.test(nomeInput)) {
+      setError("Apenas caracteres alfanuméricos e acentuações padrões são permitidos");
+      setNome("");
+    } else {
+      setError("");
+      setNome(nomeInput);
+    }
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    if (
+      !validarCEP(cep) ||
+      !validarNumero(numero) ||
+      !validarPreenchido(logradouro) ||
+      !validarPreenchido(bairro) ||
+      !validarPreenchido(cidade)
+    ) {
+      setError("Por favor, preencha todos os campos corretamente.");
+      return;
+    }
+
     try {
       const response = await axios.post("http://localhost:8080/condominios", {
-        nome: event.target.nomeInput.value,
+        nome,
         cep,
         logradouro,
+        numero,
         bairro,
         cidade,
-        uf
       });
 
       if (response.status === 201) {
@@ -74,6 +115,13 @@ function PaginaCondominio() {
     }
   };
 
+  const isFormValid =
+    validarCEP(cep) &&
+    validarNumero(numero) &&
+    validarPreenchido(logradouro) &&
+    validarPreenchido(bairro) &&
+    validarPreenchido(cidade);
+
   return (
     <Formulario>
       <form onSubmit={handleSubmit}>
@@ -83,11 +131,14 @@ function PaginaCondominio() {
             type="text"
             id="nomeInput"
             placeholder="Digite o nome do condomínio"
+            value={nome}
+            onChange={handleNomeChange}
+            disabled={loading}
           />
         </CampoInputCadastro>
 
         <CampoInputCadastro>
-          <Label htmlFor="cepInput">CEP</Label>
+          <Label htmlFor="cepInput">CEP*</Label>
           <InputCadastro
             type="text"
             id="cepInput"
@@ -95,12 +146,12 @@ function PaginaCondominio() {
             value={cep}
             onChange={handleCepChange}
             maxLength="9"
-            cepPreenchido={isCepFilledAutomatically} 
+            disabled={loading}
           />
           <ErrorPopup show={error !== ""}>{error}</ErrorPopup>
         </CampoInputCadastro>
 
-        {isCepFilledAutomatically && (
+        {isFormVisible && (
           <>
             <CampoInputCadastro>
               <Label>Logradouro</Label>
@@ -109,16 +160,18 @@ function PaginaCondominio() {
                 value={logradouro}
                 onChange={(e) => setLogradouro(e.target.value)}
                 placeholder="Logradouro"
+                disabled={loading}
               />
             </CampoInputCadastro>
 
             <CampoInputCadastro>
-              <Label>Número</Label>
+              <Label>Número*</Label>
               <InputCadastro
                 type="text"
-                value={uf}
-                readOnly
+                value={numero}
+                onChange={handleNumeroChange}
                 placeholder="Número"
+                disabled={loading}
               />
             </CampoInputCadastro>
 
@@ -129,6 +182,7 @@ function PaginaCondominio() {
                 value={bairro}
                 readOnly
                 placeholder="Bairro"
+                disabled={loading}
               />
             </CampoInputCadastro>
 
@@ -139,13 +193,15 @@ function PaginaCondominio() {
                 value={cidade}
                 readOnly
                 placeholder="Cidade"
+                disabled={loading}
               />
             </CampoInputCadastro>
-
           </>
         )}
 
-        <Botao type="submit">Cadastrar Condomínio</Botao>
+        <Botao type="submit" disabled={!isFormValid || loading}>
+          Cadastrar Condomínio
+        </Botao>
       </form>
     </Formulario>
   );
@@ -168,20 +224,20 @@ const ErrorPopup = styled.div`
 
 const Botao = styled.button`
   border-radius: 16px;
-  background-color: #294b29;
+  background-color: ${({ disabled }) => (disabled ? "#708470" : "#123312")};
   color: #fff;
   text-align: center;
   letter-spacing: -0.28px;
   padding: 16px 8px;
   font: 500 14px/100% "DM Sans", sans-serif;
   border: none;
-  cursor: pointer;
+  cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
   width: 29vw;
 
   transition: background-color 0.3s;
 
   &:hover {
-    background-color: #123312;
+    background-color: ${({ disabled }) => (disabled ? "#708470" : "#123312")};
   }
 
   @media (max-width: 991px) {
