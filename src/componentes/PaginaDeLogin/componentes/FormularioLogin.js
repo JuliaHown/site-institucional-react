@@ -64,7 +64,7 @@ const FormularioLogin = ({ onLoginSuccess }) => {
           value={email}
           onChange={handleChangeEmail}
           onBlur={handleBlurEmail}
-          isValid={isValidEmail}
+          $isValid={isValidEmail}
         />
         {isInvalidEmail && <MensagemErro>Email inválido</MensagemErro>}
       </EmailInputWrapper>
@@ -126,7 +126,7 @@ const EmailInputField = styled.input`
   margin-top: 15px;
   padding: 19px 24px;
   border-radius: 16px;
-  border: 1px solid ${(props) => (props.isValid ? "rgba(224, 229, 242, 1)" : "red")};
+  border: 1px solid ${(props) => (props.$isValid ? "rgba(224, 229, 242, 1)" : "red")}; // Alteração aqui
   color: var(--text-color, #6d7283);
   font-weight: 400;
   font-family: DM Sans, sans-serif;
