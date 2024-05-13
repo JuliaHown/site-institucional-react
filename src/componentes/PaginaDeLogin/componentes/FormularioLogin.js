@@ -57,31 +57,37 @@ const FormularioLogin = ({ onLoginSuccess }) => {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <EmailInputWrapper>
-        <InputLabel>
+      <InputWrapper>
+        <InputLabel htmlFor="email">
           Email<RequiredIndicator>*</RequiredIndicator>
         </InputLabel>
         <EmailInput
           type="email"
+          id="email"
+          name="email"
           placeholder="Digite o seu email"
           value={email}
           onChange={handleChangeEmail}
           onBlur={handleBlurEmail}
           $isValid={isValidEmail}
+          autoComplete="email"
         />
         {isInvalidEmail && <MensagemErro>Email inválido</MensagemErro>}
-      </EmailInputWrapper>
+      </InputWrapper>
 
-      <SenhaInputWrapper>
-        <InputLabel>
+      <InputWrapper>
+        <InputLabel htmlFor="senha">
           Senha<RequiredIndicator>*</RequiredIndicator>
         </InputLabel>
         <PasswordField>
           <PasswordInput
             type={showPassword ? "text" : "password"}
+            id="senha"
+            name="senha"
             placeholder="Digite a sua senha"
             value={senha}
             onChange={handleChangeSenha}
+            autoComplete="current-password"
           />
           <EyeIcon
             src="https://cdn.builder.io/api/v1/image/assets/TEMP/1f93281bd2e155dc8346c0ad62b4de0485e1878ce0a3711af246595a6810b08e?apiKey=47f1cd04243243c1a2a2819ee899bf9a&"
@@ -89,7 +95,7 @@ const FormularioLogin = ({ onLoginSuccess }) => {
             onClick={togglePasswordVisibility}
           />
         </PasswordField>
-      </SenhaInputWrapper>
+      </InputWrapper>
       {error && <MensagemErro>{error}</MensagemErro>}
       <Botao type="submit">Login</Botao>
     </Form>
@@ -108,12 +114,6 @@ const InputWrapper = styled.div`
   flex-direction: column;
   width: 100%;
   margin-top: 26px;
-`;
-
-const EmailInputWrapper = styled(InputWrapper)``;
-
-const SenhaInputWrapper = styled(InputWrapper)`
-  margin-top: 15px;
 `;
 
 const InputLabel = styled.label`

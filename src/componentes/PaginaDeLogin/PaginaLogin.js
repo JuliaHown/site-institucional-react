@@ -5,7 +5,6 @@ import ImagemPagina from "../PaginaDeLogin/componentes/Imagem";
 import Formulario from "./componentes/FormularioLogin";
 
 function PaginaLogin() {
-
   return (
     <Main>
       <VoltarWrapper>
@@ -20,11 +19,9 @@ function PaginaLogin() {
           </HeaderDescription>
         </HeaderContainer>
 
-        <FormContainer>
-          <ContentWrapper>
-            <Formulario />
-          </ContentWrapper>
-        </FormContainer>
+        <ContentWrapper>
+          <Formulario />
+        </ContentWrapper>
 
         <CriarContaWrapper>
           <CriarConta />
@@ -46,6 +43,7 @@ const Main = styled.main`
 `;
 
 const Section = styled.section`
+  display: flex;
   flex-direction: column;
   align-items: center;
   margin-left: 12.5vw;
@@ -74,16 +72,6 @@ const HeaderDescription = styled.p`
   letter-spacing: -0.32px;
   margin-top: 15px;
   font: 400 14px DM Sans, sans-serif;
-`;
-
-const FormContainer = styled.form`
-  display: flex;
-  flex-direction: column;
-  max-width: 410px;
-  padding: 0 20px;
-  font-size: 14px;
-  letter-spacing: -0.28px;
-  line-height: 100%;
 `;
 
 const ContentWrapper = styled.div`
