@@ -45,9 +45,13 @@ const FormularioLogin = ({ onLoginSuccess }) => {
           senha,
         }
       );
-
+  
       if (response.status === 200) {
-        onLoginSuccess("/cadastrarencomenda");
+        if (typeof onLoginSuccess === 'function') {
+          onLoginSuccess("/cadastrarencomenda");
+        } else {
+          console.error("Erro ao fazer login: onLoginSuccess não é uma função");
+        }
       }
     } catch (error) {
       console.error("Erro ao fazer login:", error);
@@ -56,10 +60,10 @@ const FormularioLogin = ({ onLoginSuccess }) => {
         console.error("Erro de resposta da API:", error.response.data);
         console.error("Status do erro:", error.response.status);
       } else if (error.request) {
-
+  
         console.error("Erro de requisição:", error.request);
       } else {
-
+  
         console.error("Erro ao processar requisição:", error.message);
       }
   
