@@ -149,7 +149,7 @@ function PaginaCondominio() {
           maxLength="9"
           disabled={loading}
         />
-        <ErrorPopup show={error !== ""}>{error}</ErrorPopup>
+        <ErrorPopup error={error}>{error}</ErrorPopup>
       </CampoInputCadastro>
 
       {isFormVisible && (
@@ -221,7 +221,7 @@ const ErrorPopup = styled.div`
   color: #fff;
   padding: 5px 10px;
   border-radius: 5px;
-  display: ${({ show }) => (show ? "block" : "none")};
+  display: ${({ error }) => (error ? "block" : "none")};
 `;
 
 const Botao = styled.button`
