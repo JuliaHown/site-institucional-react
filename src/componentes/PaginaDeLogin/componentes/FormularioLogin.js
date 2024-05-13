@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
 
-const FormularioLogin = ({ onLoginSuccess }) => {
+const FormularioLogin = () => {
   const [email, setEmail] = useState("");
   const [isValidEmail, setIsValidEmail] = useState(true);
   const [touchedEmail, setTouchedEmail] = useState(false);
   const [senha, setSenha] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const handleChangeEmail = (event) => {
     const novoEmail = event.target.value;
@@ -37,6 +38,9 @@ const FormularioLogin = ({ onLoginSuccess }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setLoading(true);
+    setError(null);
+
     try {
       const response = await axios.post(
         "http://localhost:8080/clientes/login",
@@ -47,11 +51,8 @@ const FormularioLogin = ({ onLoginSuccess }) => {
       );
 
       if (response.status === 200) {
-        if (typeof onLoginSuccess === 'function') {
-          onLoginSuccess("/cadastrarencomenda");
-        } else {
-          console.error("Erro ao fazer login: onLoginSuccess não é uma função");
-        }
+        // Se o login for bem-sucedido, redireciona para a página desejada
+        window.location.href = "/cadastrarencomenda";
       }
     } catch (error) {
       console.error("Erro ao fazer login:", error);
@@ -67,6 +68,8 @@ const FormularioLogin = ({ onLoginSuccess }) => {
 
       setError("Ocorreu um erro ao fazer login. Por favor, tente novamente.");
     }
+
+    setLoading(false);
   };
 
   return (
@@ -85,6 +88,7 @@ const FormularioLogin = ({ onLoginSuccess }) => {
           onBlur={handleBlurEmail}
           $isValid={isValidEmail}
           autoComplete="email"
+          disabled={loading}
         />
         {isInvalidEmail && <MensagemErro>Email inválido</MensagemErro>}
       </InputWrapper>
@@ -102,6 +106,7 @@ const FormularioLogin = ({ onLoginSuccess }) => {
             value={senha}
             onChange={handleChangeSenha}
             autoComplete="current-password"
+            disabled={loading}
           />
           <EyeIcon
             src="https://cdn.builder.io/api/v1/image/assets/TEMP/1f93281bd2e155dc8346c0ad62b4de0485e1878ce0a3711af246595a6810b08e?apiKey=47f1cd04243243c1a2a2819ee899bf9a&"
@@ -111,7 +116,7 @@ const FormularioLogin = ({ onLoginSuccess }) => {
         </PasswordField>
       </InputWrapper>
       {error && <MensagemErro>{error}</MensagemErro>}
-      <Botao type="submit">Login</Botao>
+      <Botao type="submit" disabled={loading}>Login</Botao>
     </Form>
   );
 };
@@ -214,6 +219,11 @@ const Botao = styled.button`
 
   &:hover {
     background-color: #3c4d2b;
+  }
+
+  &:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
   }
 `;
 
