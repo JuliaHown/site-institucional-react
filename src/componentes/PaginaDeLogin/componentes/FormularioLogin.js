@@ -38,10 +38,13 @@ const FormularioLogin = ({ onLoginSuccess }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post("http://localhost:8080/clientes/login", {
-        email,
-        senha,
-      });
+      const response = await axios.post(
+        "http://localhost:8080/clientes/login",
+        {
+          email,
+          senha,
+        }
+      );
 
       if (response.status === 200) {
         onLoginSuccess("/cadastrarencomenda");
@@ -53,7 +56,7 @@ const FormularioLogin = ({ onLoginSuccess }) => {
   };
 
   return (
-    <FormWrapper onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit}>
       <EmailInputWrapper>
         <InputLabel>
           Email<RequiredIndicator>*</RequiredIndicator>
@@ -89,11 +92,11 @@ const FormularioLogin = ({ onLoginSuccess }) => {
       </SenhaInputWrapper>
       {error && <MensagemErro>{error}</MensagemErro>}
       <Botao type="submit">Login</Botao>
-    </FormWrapper>
+    </Form>
   );
 };
 
-const FormWrapper = styled.form`
+const Form = styled.form`
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -126,7 +129,8 @@ const Input = styled.input`
   margin-top: 15px;
   padding: 19px 24px;
   border-radius: 16px;
-  border: 1px solid ${(props) => (props.$isValid ? "rgba(224, 229, 242, 1)" : "red")};
+  border: 1px solid
+    ${(props) => (props.$isValid ? "rgba(224, 229, 242, 1)" : "red")};
   color: var(--text-color, #6d7283);
   font-weight: 400;
   font-family: DM Sans, sans-serif;
@@ -136,8 +140,7 @@ const Input = styled.input`
   }
 `;
 
-const EmailInput = styled(Input)`
-`;
+const EmailInput = styled(Input)``;
 
 const PasswordField = styled.div`
   display: flex;
