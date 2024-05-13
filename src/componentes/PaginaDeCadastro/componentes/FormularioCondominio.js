@@ -66,7 +66,7 @@ function PaginaCondominio() {
     const numeroInput = event.target.value;
     if (!validarNumero(numeroInput)) {
       setError("Apenas números são permitidos");
-      setNumero("");
+      setNumero(""); // Definir como string vazia se a entrada for inválida
     } else {
       setError("");
       setNumero(numeroInput);
@@ -76,9 +76,7 @@ function PaginaCondominio() {
   const handleNomeChange = (event) => {
     const nomeInput = event.target.value;
     if (!/^[\w\s\u00C0-\u00FF]+$/.test(nomeInput)) {
-      setError(
-        "Apenas caracteres alfanuméricos e acentuações padrões são permitidos"
-      );
+      setError("Apenas caracteres alfanuméricos e acentuações padrões são permitidos");
       setNome("");
     } else {
       setError("");
@@ -125,91 +123,103 @@ function PaginaCondominio() {
     validarPreenchido(cidade);
 
   return (
-    <Formulario onSubmit={handleSubmit}>
-      <CampoInputCadastro>
-        <Label htmlFor="nomeInput">Nome do Condomínio*</Label>
-        <InputCadastro
-          type="text"
-          id="nomeInput"
-          placeholder="Digite o nome do condomínio"
-          value={nome}
-          onChange={handleNomeChange}
-          disabled={loading}
-        />
-      </CampoInputCadastro>
+    <Formulario>
+      <form onSubmit={handleSubmit}>
+        <CampoInputCadastro>
+          <Label htmlFor="nomeInput">Nome do Condomínio</Label>
+          <InputCadastro
+            type="text"
+            id="nomeInput"
+            placeholder="Digite o nome do condomínio"
+            value={nome}
+            onChange={handleNomeChange}
+            disabled={loading}
+          />
+        </CampoInputCadastro>
 
-      <CampoInputCadastro>
-        <Label htmlFor="cepInput">CEP*</Label>
-        <InputCadastro
-          type="text"
-          id="cepInput"
-          placeholder="Digite o CEP"
-          value={cep}
-          onChange={handleCepChange}
-          maxLength="9"
-          disabled={loading}
-        />
-      </CampoInputCadastro>
+        <CampoInputCadastro>
+          <Label htmlFor="cepInput">CEP*</Label>
+          <InputCadastro
+            type="text"
+            id="cepInput"
+            placeholder="Digite o CEP"
+            value={cep}
+            onChange={handleCepChange}
+            maxLength="9"
+            disabled={loading}
+          />
+          <ErrorPopup show={error !== ""}>{error}</ErrorPopup>
+        </CampoInputCadastro>
 
-      {isFormVisible && (
-        <>
-          <CampoInputCadastro>
-            <Label htmlFor="logradouroInput">Logradouro</Label>
-            <InputCadastro
-              type="text"
-              id="logradouroInput"
-              value={logradouro}
-              onChange={(e) => setLogradouro(e.target.value)}
-              placeholder="Logradouro"
-              disabled={loading}
-            />
-          </CampoInputCadastro>
+        {isFormVisible && (
+          <>
+            <CampoInputCadastro>
+              <Label>Logradouro</Label>
+              <InputCadastro
+                type="text"
+                value={logradouro}
+                onChange={(e) => setLogradouro(e.target.value)}
+                placeholder="Logradouro"
+                disabled={loading}
+              />
+            </CampoInputCadastro>
 
-          <CampoInputCadastro>
-            <Label htmlFor="numeroInput">Número*</Label>
-            <InputCadastro
-              type="text"
-              id="numeroInput"
-              value={numero}
-              onChange={handleNumeroChange}
-              placeholder="Número"
-              disabled={loading}
-            />
-          </CampoInputCadastro>
+            <CampoInputCadastro>
+              <Label>Número*</Label>
+              <InputCadastro
+                type="text"
+                value={numero}
+                onChange={handleNumeroChange}
+                placeholder="Número"
+                disabled={loading}
+              />
+            </CampoInputCadastro>
 
-          <CampoInputCadastro>
-            <Label>Bairro</Label>
-            <InputCadastro
-              type="text"
-              value={bairro}
-              readOnly
-              placeholder="Bairro"
-              disabled={loading}
-            />
-          </CampoInputCadastro>
+            <CampoInputCadastro>
+              <Label>Bairro</Label>
+              <InputCadastro
+                type="text"
+                value={bairro}
+                readOnly
+                placeholder="Bairro"
+                disabled={loading}
+              />
+            </CampoInputCadastro>
 
-          <CampoInputCadastro>
-            <Label>Cidade</Label>
-            <InputCadastro
-              type="text"
-              value={cidade}
-              readOnly
-              placeholder="Cidade"
-              disabled={loading}
-            />
-          </CampoInputCadastro>
-        </>
-      )}
+            <CampoInputCadastro>
+              <Label>Cidade</Label>
+              <InputCadastro
+                type="text"
+                value={cidade}
+                readOnly
+                placeholder="Cidade"
+                disabled={loading}
+              />
+            </CampoInputCadastro>
+          </>
+        )}
 
-      <Botao type="submit" disabled={!isFormValid || loading}>
-        Cadastrar Condomínio
-      </Botao>
+        <Botao type="submit" disabled={!isFormValid || loading}>
+          Cadastrar Condomínio
+        </Botao>
+      </form>
     </Formulario>
   );
 }
 
 const Formulario = styled.div`
   margin-left: 12vw;
+`;
+
+const ErrorPopup = styled.div`
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 0;
+  background-color: #ff4d4f;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  display: ${({ show }) => (show ? "block" : "none")};
 `;
 
 const Botao = styled.button`
