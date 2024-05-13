@@ -53,13 +53,12 @@ const FormularioLogin = ({ onLoginSuccess }) => {
   };
 
   return (
-    <FormWrapper>
-    <form onSubmit={handleSubmit}>
+    <FormWrapper onSubmit={handleSubmit}>
       <EmailInputWrapper>
         <InputLabel>
           Email<RequiredIndicator>*</RequiredIndicator>
         </InputLabel>
-        <EmailInputField
+        <EmailInput
           type="email"
           placeholder="Digite o seu email"
           value={email}
@@ -90,8 +89,7 @@ const FormularioLogin = ({ onLoginSuccess }) => {
       </SenhaInputWrapper>
       {error && <MensagemErro>{error}</MensagemErro>}
       <Botao type="submit">Login</Botao>
-    </form>
-  </FormWrapper>
+    </FormWrapper>
   );
 };
 
@@ -123,12 +121,12 @@ const RequiredIndicator = styled.span`
   color: rgba(71, 114, 64, 1);
 `;
 
-const EmailInputField = styled.input`
+const Input = styled.input`
   width: 100%;
   margin-top: 15px;
   padding: 19px 24px;
   border-radius: 16px;
-  border: 1px solid ${(props) => (props.$isValid ? "rgba(224, 229, 242, 1)" : "red")}; // Alteração aqui
+  border: 1px solid ${(props) => (props.$isValid ? "rgba(224, 229, 242, 1)" : "red")};
   color: var(--text-color, #6d7283);
   font-weight: 400;
   font-family: DM Sans, sans-serif;
@@ -136,6 +134,9 @@ const EmailInputField = styled.input`
   @media (max-width: 768px) {
     max-width: 100%;
   }
+`;
+
+const EmailInput = styled(Input)`
 `;
 
 const PasswordField = styled.div`
@@ -148,7 +149,7 @@ const PasswordField = styled.div`
   border: 1px solid rgba(224, 229, 242, 1);
   color: var(--text-color, #6d7283);
   font-weight: 400;
-  background-color: #fff; /* Adicionado */
+  background-color: #fff;
 `;
 
 const PasswordInput = styled.input`
