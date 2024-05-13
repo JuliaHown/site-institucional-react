@@ -149,7 +149,6 @@ function PaginaCondominio() {
           maxLength="9"
           disabled={loading}
         />
-        <ErrorPopup error={error}>{error}</ErrorPopup>
       </CampoInputCadastro>
 
       {isFormVisible && (
@@ -211,17 +210,6 @@ function PaginaCondominio() {
 
 const Formulario = styled.div`
   margin-left: 12vw;
-`;
-
-const ErrorPopup = styled.div`
-  position: absolute;
-  top: calc(100% + 5px);
-  left: 0;
-  background-color: #ff4d4f;
-  color: #fff;
-  padding: 5px 10px;
-  border-radius: 5px;
-  display: ${({ error }) => (error ? "block" : "none")};
 `;
 
 const Botao = styled.button`
