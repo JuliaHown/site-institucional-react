@@ -45,7 +45,7 @@ const FormularioLogin = ({ onLoginSuccess }) => {
           senha,
         }
       );
-  
+
       if (response.status === 200) {
         if (typeof onLoginSuccess === 'function') {
           onLoginSuccess("/cadastrarencomenda");
@@ -55,18 +55,16 @@ const FormularioLogin = ({ onLoginSuccess }) => {
       }
     } catch (error) {
       console.error("Erro ao fazer login:", error);
-      
+
       if (error.response) {
         console.error("Erro de resposta da API:", error.response.data);
         console.error("Status do erro:", error.response.status);
       } else if (error.request) {
-  
         console.error("Erro de requisição:", error.request);
       } else {
-  
         console.error("Erro ao processar requisição:", error.message);
       }
-  
+
       setError("Ocorreu um erro ao fazer login. Por favor, tente novamente.");
     }
   };
