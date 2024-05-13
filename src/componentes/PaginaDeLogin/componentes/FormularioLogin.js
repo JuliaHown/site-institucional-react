@@ -46,7 +46,7 @@ const FormularioLogin = ({ onLoginSuccess }) => {
         }
       );
 
-      if (response.status === 200) {
+      if (response.status == 200) {
         onLoginSuccess("/cadastrarencomenda");
       }
     } catch (error) {
