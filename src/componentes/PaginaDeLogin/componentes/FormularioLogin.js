@@ -53,7 +53,8 @@ const FormularioLogin = ({ onLoginSuccess }) => {
   };
 
   return (
-    <FormWrapper onSubmit={handleSubmit}>
+    <FormWrapper>
+    <form onSubmit={handleSubmit}>
       <EmailInputWrapper>
         <InputLabel>
           Email<RequiredIndicator>*</RequiredIndicator>
@@ -89,7 +90,8 @@ const FormularioLogin = ({ onLoginSuccess }) => {
       </SenhaInputWrapper>
       {error && <MensagemErro>{error}</MensagemErro>}
       <Botao type="submit">Login</Botao>
-    </FormWrapper>
+    </form>
+  </FormWrapper>
   );
 };
 
