@@ -3,7 +3,7 @@ import { CampoInputCadastro, InputCadastro, Label } from "./styledComponents";
 import styled from "styled-components";
 import axios from "axios";
 
-import { validarEmail, formatarTelefone } from "./Validacoes";
+import { validarEmail, formatarTelefone, validarSenha } from "./Validacoes";
 
 function FormularioCadastro() {
   const [mostrarSenha, setMostrarSenha] = useState(false);
@@ -12,6 +12,7 @@ function FormularioCadastro() {
   const [telefone, setTelefone] = useState("");
   const [senha, setSenha] = useState("");
   const [cadastrado, setCadastrado] = useState(false);
+  const [senhaValida, setSenhaValida] = useState(true);
 
   const toggleMostrarSenha = () => {
     setMostrarSenha((prevState) => !prevState);
@@ -26,7 +27,6 @@ function FormularioCadastro() {
     setEmailValido(validarEmail(email));
   };
 
-
   const handleChangeTelefone = (event) => {
     const novoTelefone = event.target.value;
     if (novoTelefone.length <= 11) {
@@ -34,8 +34,18 @@ function FormularioCadastro() {
     }
   };
 
+  const handleChangeSenha = (event) => {
+    const novaSenha = event.target.value;
+    setSenha(novaSenha);
+    setSenhaValida(validarSenha(novaSenha));
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
+    if (!validarSenha(senha)) {
+      setSenhaValida(false);
+      return;
+    }
     try {
       const response = await axios.post("http://localhost:8080/clientes", {
         email,
@@ -45,7 +55,6 @@ function FormularioCadastro() {
 
       if (response.status === 201) {
         setCadastrado(true);
-
         window.location.href = "/cadastrarcondominio";
       }
     } catch (error) {
@@ -99,7 +108,7 @@ function FormularioCadastro() {
               id="senhaInput"
               placeholder="Digite a sua senha"
               value={senha}
-              onChange={(e) => setSenha(e.target.value)}
+              onChange={handleChangeSenha}
             />
             <IconeOlho
               src="https://cdn.builder.io/api/v1/image/assets/TEMP/35bfc57b8777953e994bba70018953c83690144f7fa401fe5e368b66c2a0a905?apiKey=47f1cd04243243c1a2a2819ee899bf9a&"
@@ -107,6 +116,9 @@ function FormularioCadastro() {
               onClick={toggleMostrarSenha}
             />
           </div>
+          {!senhaValida && (
+            <span style={{ color: "red" }}>Senha deve ter no mínimo 6 caracteres</span>
+          )}
         </CampoInputCadastro>
 
         <Botao type="submit" disabled={cadastrado}>
