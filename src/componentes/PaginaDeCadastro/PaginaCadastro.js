@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Formulario from "./componentes/CadastroFormulario";
 import VoltarHome from "../PaginaDeLogin/componentes/btnVoltarHome";
 import ImagemCadastro from "./componentes/Imagem";
+import TextoLogin from "./componentes/TextoLogin"
 
 
 function PaginaCadastrar() {
@@ -23,6 +24,7 @@ function PaginaCadastrar() {
           </Subtitulo>
         </Header>
         <Formulario />
+        <TextoLogin />
       </Container>
       <ImagemContainer>
         <ImagemCadastro />
