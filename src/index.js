@@ -8,6 +8,8 @@ import Cadastrar from "./componentes/PaginaDeCadastro/PaginaCadastro";
 import CadastrarCondominio from "./componentes/PaginaDeCadastro/PaginaCondominio"
 import ContrateNos from "./componentes/PaginaContrate/Contrate";
 import CadastroEncomendaCliente from "./componentes/TelasDoCliente/CadastroEncomenda/CadastroEncomenda"
+import PaginaInicial from "./componentes/TelasDoCliente/PaginaInicial/PaginaInicial"
+import Estoque from "./componentes/TelasDoCliente/Estoque/Estoque"
 
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -25,7 +27,9 @@ ReactDOM.createRoot(root).render(
         <Route path="/login" element={<Login />} />
         <Route path="/cadastrar" element={<Cadastrar />} />
         <Route path="/cadastrarcondominio" element={<CadastrarCondominio />} />
-        <Route path="/cadastrarencomenda" element={<CadastroEncomendaCliente />} />
+        <Route path="/pagina-inicial" element={<PaginaInicial />} />
+        <Route path="/cadastrar-encomenda" element={<CadastroEncomendaCliente />} />
+        <Route path="/estoque" element={<Estoque />} />
       </Routes>
     </Router>
   </React.StrictMode>
