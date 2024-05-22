@@ -2,10 +2,11 @@
   <img src="/src/assets/LogoAlt2.svg" width="400" alt="Logo do Zé Porteiro">
 </p>
 
-# Zé Porteiro: Simplificando a Gestão de Entregas em Condomínios
+<h1 align="center"> Zé Porteiro: Simplificando a Gestão de Entregas em Condomínios </h1>
 
 
 Com o crescimento das compras online, os condomínios enfrentam desafios na gestão de entregas, como sobrecarga dos porteiros, confusões nos pacotes e acúmulo de encomendas não retiradas. O Zé Porteiro surge para simplificar esse processo, substituindo métodos obsoletos por um sistema digital eficiente, trazendo eficiência, precisão, conveniência e segurança.
+
 
 ## Funcionalidades Principais
 
@@ -20,6 +21,11 @@ Com o crescimento das compras online, os condomínios enfrentam desafios na gest
 - **Confirmação de Retirada pelo Morador:** Os moradores podem confirmar a retirada das entregas via WhatsApp, assegurando que tudo foi recebido corretamente.
 
 - **Indicação de Lotação de Encomendas:** O sistema fornece informações em tempo real sobre a lotação total de encomendas na portaria, permitindo um gerenciamento mais eficiente.
+
+<p align="center">
+  <img src="https://i.imgur.com/Yc8zhyj.png" width="900" alt="Logo do Meu Projeto">
+</p>
+
 
 ## Objetivo
 
