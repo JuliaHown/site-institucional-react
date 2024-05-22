@@ -1,7 +1,7 @@
 export const validarNome = (nome) => {
-    return /^[a-zA-Z0-9\s]+$/.test(nome);
-  };
-  
+  return /^[a-zA-Z\s]+$/.test(nome);
+};
+
 
 export const validarCEP = (cep) => {
     return cep.match(/^\d{8}$/);
@@ -20,6 +20,9 @@ export const validarCEP = (cep) => {
     return regexEmail.test(email);
   };
 
+  export const validarSenha = (senha) => {
+    return senha.length >= 6;
+  };
 
   export const formatarTelefone = (telefone) => {
     const apenasNumeros = telefone.replace(/[^\d]/g, "");
