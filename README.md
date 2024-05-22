@@ -1,70 +1,45 @@
-# Getting Started with Create React App
+<p align="center">
+  <img src="/src/assets/LogoAlt2.svg" width="400" alt="Logo do Zé Porteiro">
+</p>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Zé Porteiro: Simplificando a Gestão de Entregas em Condomínios
 
-## Available Scripts
 
-In the project directory, you can run:
+Com o crescimento das compras online, os condomínios enfrentam desafios na gestão de entregas, como sobrecarga dos porteiros, confusões nos pacotes e acúmulo de encomendas não retiradas. O Zé Porteiro surge para simplificar esse processo, substituindo métodos obsoletos por um sistema digital eficiente, trazendo eficiência, precisão, conveniência e segurança.
 
-### `npm start`
+## Funcionalidades Principais
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **Registro da entrega via Inteligência Artificial:** Utilização de tecnologia de ponta para automatizar o registro de todas as entregas, garantindo precisão e agilidade no processo.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **Notificação via WhatsApp:** Os moradores são notificados sobre a chegada de suas encomendas diretamente em seus dispositivos móveis. Caso a entrega não seja retirada em 24 horas, uma nova notificação é enviada como lembrete.
 
-### `npm test`
+- **Registro do Porteiro Responsável:** Cada entrega é registrada com o nome do porteiro responsável, garantindo transparência e accountability no processo.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **Confirmação de Entrega:** Os porteiros podem confirmar facilmente a entrega das encomendas, mantendo um registro digital seguro de todas as transações.
 
-### `npm run build`
+- **Confirmação de Retirada pelo Morador:** Os moradores podem confirmar a retirada das entregas via WhatsApp, assegurando que tudo foi recebido corretamente.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **Indicação de Lotação de Encomendas:** O sistema fornece informações em tempo real sobre a lotação total de encomendas na portaria, permitindo um gerenciamento mais eficiente.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Objetivo
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+O objetivo do Zé Porteiro é melhorar a gestão de entregas nos condomínios, trazendo um sistema simples e assertivo que reduz o tempo gasto pelos porteiros, minimiza erros de entrega, aumenta a satisfação dos moradores e melhora a eficiência operacional da equipe de portaria.
 
-### `npm run eject`
+## Como Usar
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+1. Clone este repositório:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+git clone https://github.com/zePorteiro/site-institucional-react.git
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+2. Instale as dependências:
+npm install
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+3. Inicie o servidor:
+npm start
 
-## Learn More
+4. Acesse a aplicação em seu navegador no endereço: `http://localhost:3000`.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Licença
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Este projeto está licenciado sob a Licença [MIT](LICENSE).
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
