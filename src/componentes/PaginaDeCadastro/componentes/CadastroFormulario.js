@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { CampoInputCadastro, InputCadastro, Label } from "./styledComponents";
 import styled from "styled-components";
 import axios from "axios";
-
 import { validarEmail, formatarTelefone, validarSenha } from "./Validacoes";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 function FormularioCadastro() {
   const [mostrarSenha, setMostrarSenha] = useState(false);
@@ -11,7 +12,6 @@ function FormularioCadastro() {
   const [emailValido, setEmailValido] = useState(true);
   const [telefone, setTelefone] = useState("");
   const [senha, setSenha] = useState("");
-  const [cadastrado, setCadastrado] = useState(false);
   const [senhaValida, setSenhaValida] = useState(true);
 
   const toggleMostrarSenha = () => {
@@ -42,10 +42,19 @@ function FormularioCadastro() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (!validarSenha(senha)) {
-      setSenhaValida(false);
+
+    if (!validarEmail(email)) {
+      setEmailValido(false);
+      toast.error("Email inválido.");
       return;
     }
+
+    if (!validarSenha(senha)) {
+      setSenhaValida(false);
+      toast.error("Senha deve ter no mínimo 6 caracteres.");
+      return;
+    }
+
     try {
       const response = await axios.post("http://localhost:8080/clientes", {
         email,
@@ -54,10 +63,17 @@ function FormularioCadastro() {
       });
 
       if (response.status === 201) {
-        setCadastrado(true);
-        window.location.href = "/cadastrarcondominio";
+        toast.success("Cadastro concluído com sucesso!");
+        setTimeout(() => {
+          window.location.href = "/cadastrarcondominio";
+        }, 3000); // Redireciona após 3 segundos
       }
     } catch (error) {
+      if (error.response && error.response.data && error.response.data.message) {
+        toast.error(error.response.data.message);
+      } else {
+        toast.error("Erro ao cadastrar usuário. Por favor, tente novamente.");
+      }
       console.error("Erro ao cadastrar usuário:", error);
     }
   };
@@ -121,11 +137,11 @@ function FormularioCadastro() {
           )}
         </CampoInputCadastro>
 
-        <Botao type="submit" disabled={cadastrado}>
+        <Botao type="submit">
           Cadastrar
         </Botao>
       </form>
-      {cadastrado && <p>Usuário cadastrado com sucesso!</p>}
+      <ToastContainer />
     </Formulario>
   );
 }
