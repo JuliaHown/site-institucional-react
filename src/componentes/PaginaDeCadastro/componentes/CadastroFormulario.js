@@ -11,9 +11,11 @@ function FormularioCadastro() {
   const [email, setEmail] = useState("");
   const [emailValido, setEmailValido] = useState(true);
   const [telefone, setTelefone] = useState("");
+  const [telefoneValido, setTelefoneValido] = useState(true);
   const [senha, setSenha] = useState("");
   const [senhaValida, setSenhaValida] = useState(true);
   const [nome, setNome] = useState("");
+  const [nomeValido, setNomeValido] = useState(true);
 
   const toggleMostrarSenha = () => {
     setMostrarSenha((prevState) => !prevState);
@@ -30,9 +32,13 @@ function FormularioCadastro() {
 
   const handleChangeTelefone = (event) => {
     const novoTelefone = event.target.value;
-    if (novoTelefone.length <= 11) {
+    if (/^\d*$/.test(novoTelefone) && novoTelefone.length <= 11) {
       setTelefone(formatarTelefone(novoTelefone));
     }
+  };
+
+  const handleBlurTelefone = () => {
+    setTelefoneValido(telefone.length === 11);
   };
 
   const handleChangeSenha = (event) => {
@@ -42,7 +48,13 @@ function FormularioCadastro() {
   };
 
   const handleChangeNome = (event) => {
-    setNome(event.target.value);
+    const novoNome = event.target.value;
+    if (/^[a-zA-Z\s]*$/.test(novoNome)) {
+      setNome(novoNome);
+      setNomeValido(true);
+    } else {
+      setNomeValido(false);
+    }
   };
 
   const handleSubmit = async (event) => {
@@ -53,9 +65,19 @@ function FormularioCadastro() {
       return;
     }
 
+    if (!nomeValido) {
+      toast.error("O nome não pode conter caracteres não alfabéticos.");
+      return;
+    }
+
     if (!validarEmail(email)) {
       setEmailValido(false);
       toast.error("Email inválido.");
+      return;
+    }
+
+    if (!telefoneValido) {
+      toast.error("O telefone deve conter exatamente 11 dígitos.");
       return;
     }
 
@@ -101,6 +123,9 @@ function FormularioCadastro() {
             value={nome}
             onChange={handleChangeNome}
           />
+          {!nomeValido && (
+            <span style={{ color: "red" }}>Nome inválido (somente letras e espaços são permitidos)</span>
+          )}
         </CampoInputCadastro>
 
         <CampoInputCadastro>
@@ -126,7 +151,11 @@ function FormularioCadastro() {
             placeholder="(00) 99999-9999"
             value={telefone}
             onChange={handleChangeTelefone}
+            onBlur={handleBlurTelefone}
           />
+          {!telefoneValido && (
+            <span style={{ color: "red" }}>Telefone deve ter exatamente 11 dígitos</span>
+          )}
         </CampoInputCadastro>
 
         <CampoInputCadastro>
