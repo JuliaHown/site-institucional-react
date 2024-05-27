@@ -51,8 +51,7 @@ const FormularioLogin = () => {
       );
 
       if (response.status === 200) {
-        // Se o login for bem-sucedido, redireciona para a página desejada
-        window.location.href = "/cadastrarencomenda";
+        window.location.href = "/cadastrar-encomenda";
       }
     } catch (error) {
       console.error("Erro ao fazer login:", error);
