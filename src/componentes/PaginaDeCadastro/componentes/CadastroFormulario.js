@@ -13,6 +13,7 @@ function FormularioCadastro() {
   const [telefone, setTelefone] = useState("");
   const [senha, setSenha] = useState("");
   const [senhaValida, setSenhaValida] = useState(true);
+  const [nome, setNome] = useState("");
 
   const toggleMostrarSenha = () => {
     setMostrarSenha((prevState) => !prevState);
@@ -40,8 +41,17 @@ function FormularioCadastro() {
     setSenhaValida(validarSenha(novaSenha));
   };
 
+  const handleChangeNome = (event) => {
+    setNome(event.target.value);
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    if (!nome.trim() || !email.trim() || !telefone.trim() || !senha.trim()) {
+      toast.error("Todos os campos são obrigatórios.");
+      return;
+    }
 
     if (!validarEmail(email)) {
       setEmailValido(false);
@@ -57,6 +67,7 @@ function FormularioCadastro() {
 
     try {
       const response = await axios.post("http://localhost:8080/clientes", {
+        nome,
         email,
         telefone,
         senha,
@@ -87,6 +98,8 @@ function FormularioCadastro() {
             type="text"
             id="nomeInput"
             placeholder="Digite o seu nome completo"
+            value={nome}
+            onChange={handleChangeNome}
           />
         </CampoInputCadastro>
 
