@@ -3,15 +3,13 @@ import styled from "styled-components";
 import axios from "axios";
 import Style from "../../TelasDoCliente/ClientStyle";
 import MenuLateral from "./Componentes/Sidebar";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const CampoInput = ({ label, placeholder, value, onChange }) => (
   <div>
     <Label>{label}</Label>
-    <Input
-      placeholder={placeholder}
-      value={value}
-      onChange={onChange}
-    />
+    <Input placeholder={placeholder} value={value} onChange={onChange} />
   </div>
 );
 
@@ -27,36 +25,27 @@ const SecaoInformacao = ({ titulo, texto, textoBotao }) => (
   </ContainerInfo>
 );
 
+const obterDataAtualFormatada = () => {
+  const dataAtual = new Date();
+  const dia = String(dataAtual.getDate()).padStart(2, "0");
+  const mes = String(dataAtual.getMonth() + 1).padStart(2, "0");
+  const ano = dataAtual.getFullYear();
+  const horas = String(dataAtual.getHours()).padStart(2, "0");
+  const minutos = String(dataAtual.getMinutes()).padStart(2, "0");
+  const segundos = String(dataAtual.getSeconds()).padStart(2, "0");
+  return `${dia}/${mes}/${ano} ${horas}:${minutos}:${segundos}`;
+};
+
 const CadastroEncomendas = () => {
   const [nomeDestinatario, setNomeDestinatario] = useState("");
   const [blocoDestinatario, setBlocoDestinatario] = useState("");
   const [numeroApartamento, setNumeroApartamento] = useState("");
-  const [dataRecebimento, setDataRecebimento] = useState("");
-  const [dataEntrega, setDataEntrega] = useState("");
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    // Atualizar data e hora de recebimento automaticamente
-    const currentDate = new Date();
-    setDataRecebimento(formatDate(currentDate));
-    
-    // Atualizar data e hora de entrega automaticamente
-    const nextDay = new Date(currentDate);
-    nextDay.setDate(nextDay.getDate() + 1);
-    setDataEntrega(formatDate(nextDay));
-  }, []);
-
-  const formatDate = (date) => {
-    const day = String(date.getDate()).padStart(2, "0");
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-    const year = date.getFullYear();
-    const hours = String(date.getHours()).padStart(2, "0");
-    const minutes = String(date.getMinutes()).padStart(2, "0");
-    const seconds = String(date.getSeconds()).padStart(2, "0");
-    return `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
-  };
-
-  // Fazer requisição //
+  const [tipoEntrega, setTipoEntrega] = useState(""); // Adicionando estado para tipoEntrega
+  const [dataRecebimento, setDataRecebimento] = useState(
+    obterDataAtualFormatada()
+  );
+  const [dataEntrega, setDataEntrega] = useState(obterDataAtualFormatada());
+  const [error, setError] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -67,20 +56,22 @@ const CadastroEncomendas = () => {
         numeroApartamento,
         dataRecebimento,
         dataEntrega,
+        tipoEntrega, // Adicionando tipoEntrega ao objeto enviado no POST
       });
 
       if (response.status === 201) {
-        alert("Encomenda cadastrada com sucesso!");
+        toast.success("Encomenda cadastrada com sucesso!");
         setNomeDestinatario("");
         setBlocoDestinatario("");
         setNumeroApartamento("");
         setDataRecebimento("");
         setDataEntrega("");
+        setTipoEntrega(""); // Resetando tipoEntrega após o cadastro
       }
     } catch (error) {
       setError("Erro ao cadastrar encomenda. Por favor, tente novamente.");
       console.error("Erro ao cadastrar encomenda:", error);
-      alert("Erro ao cadastrar encomenda. Por favor, tente novamente.");
+      toast.error("Erro ao cadastrar encomenda. Por favor, tente novamente.");
     }
   };
 
@@ -109,6 +100,12 @@ const CadastroEncomendas = () => {
               placeholder="Digite o número do apartamento"
               value={numeroApartamento}
               onChange={(e) => setNumeroApartamento(e.target.value)}
+            />
+            <CampoInput
+              label="Tipo Entrega*"
+              placeholder="Tipo da entrega"
+              value={tipoEntrega}
+              onChange={(e) => setTipoEntrega(e.target.value)}
             />
             <CampoInput
               label="Data de Recebimento*"
@@ -142,7 +139,7 @@ const CadastroEncomendas = () => {
 const Container = styled.div`
   display: flex;
   justify-content: center;
-  align-items: flex-start; 
+  align-items: flex-start;
   height: 100vh;
 `;
 

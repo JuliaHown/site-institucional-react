@@ -1,24 +1,69 @@
-import React from "react";
+import React, { useState, useEffect } from 'react';
 import Style from "../../TelasDoCliente/ClientStyle";
 import styled from "styled-components";
 import MenuLateral from "../CadastroEncomenda/Componentes/Sidebar"
 
-const InformacoesCondominio = () => (
-  <Card>
-    <CabecalhoCard>
-      <TituloCard>Informações do condomínio</TituloCard>
-      <ImagemCard src="https://cdn.builder.io/api/v1/image/assets/TEMP/d596939f399d01d3998483aa05828c6f5bd62a8e2fbdd1aedbb8d7bc9c7c58b1?apiKey=47f1cd04243243c1a2a2819ee899bf9a&" />
-    </CabecalhoCard>
-    <ConteudoCard>
-      <InfoItem label="Endereço" content="Rua Quatorze de Abril, 987 - Alta da Lapa" />
-      <InfoItem label="CEP" content="01234-5678" />
-      <InfoItem label="Estado" content="São Paulo" />
-      <InfoItem label="Cidade" content="São Paulo" />
-      <InfoItem label="Possui blocos?" content="Sim" />
-      <InfoItem label="Síndico(a)" content="Evandro Costa de Souza" />
-    </ConteudoCard>
-  </Card>
-);
+const InformacoesCondominio = () => {
+  const [condominio, setCondominio] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+
+    const atualizarCondominio = async (condominioId) => {
+      try {
+        const response = await fetch(`http://localhost:8080/condominios/${condominioId}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            nome: 'Novo Nome do Condomínio',
+            cep: '98765-432',
+            logradouro: 'Nova Rua',
+            numero: '456',
+            bairro: 'Novo Bairro',
+            cidade: 'Nova Cidade',
+          })
+        });
+        const data = await response.json();
+        setCondominio(data);
+        setIsLoading(false);
+      } catch (error) {
+        console.error('Erro ao atualizar o condomínio:', error);
+        setIsLoading(false);
+      }
+    };
+
+    const condominioIdDoUsuario = 123; 
+
+    atualizarCondominio(condominioIdDoUsuario);
+  }, []);
+
+  return (
+    <div>
+      {isLoading ? (
+        <LoadingSpinner />
+      ) : (
+        condominio ? (
+          <Card>
+            <CabecalhoCard>
+              <TituloCard>Informações do condomínio</TituloCard>
+            </CabecalhoCard>
+            <ConteudoCard>
+              <InfoItem label="Nome" content={condominio.nome} />
+              <InfoItem label="Endereço" content={`${condominio.logradouro}, ${condominio.numero}`} />
+              <InfoItem label="CEP" content={condominio.cep} />
+              <InfoItem label="Bairro" content={condominio.bairro} />
+              <InfoItem label="Cidade" content={condominio.cidade} />
+            </ConteudoCard>
+          </Card>
+        ) : (
+          <p>Não foi possível carregar as informações do condomínio.</p>
+        )
+      )}
+    </div>
+  );
+};
 
 const InfoItem = ({ label, content }) => (
   <div>
@@ -28,6 +73,7 @@ const InfoItem = ({ label, content }) => (
     <br />
   </div>
 );
+
 
 const PaginaPrincipal = () => (
   <Principal>
@@ -135,7 +181,6 @@ const Imagem = styled.img`
   object-position: center;
   width: 100%;
 
-
   @media (max-width: 991px) {
     max-width: 100%;
   }
@@ -178,8 +223,8 @@ const Card = styled.div`
   display: flex;
   flex-grow: 1;
   flex-direction: column;
-  width: 100%;
-  padding: 8px 0 0x;
+  width: 80%; /* Alterei o tamanho do card */
+  padding: 8px 0 0;
 
   @media (max-width: 991px) {
     max-width: 100%;
@@ -191,7 +236,7 @@ const Card = styled.div`
 const CabecalhoCard = styled.div`
   display: flex;
   gap: 20px;
-  font-size: 20px;
+  font-size: 16px; /* Alterei o tamanho do texto do cabeçalho */
   color: #477240;
   font-weight: 700;
   letter-spacing: -0.4px;
@@ -216,11 +261,25 @@ const ConteudoCard = styled.div`
   color: #787878;
   letter-spacing: -0.32px;
   margin-top: 18px;
-  font: 400 16px/26px DM Sans, sans-serif;
+  font: 400 14px/24px DM Sans, sans-serif; /* Alterei o tamanho do texto do conteúdo */
 `;
 
 const Label = styled.span`
   font-weight: 700;
+`;
+
+const LoadingSpinner = styled.div`
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
 `;
 
 export default PaginaPrincipal;

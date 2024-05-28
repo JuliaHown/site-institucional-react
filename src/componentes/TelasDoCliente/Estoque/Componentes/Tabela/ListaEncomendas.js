@@ -11,7 +11,7 @@ function TabelaEncomenda() {
   useEffect(() => {
     const fetchEncomendas = async () => {
       try {
-        const response = await axios.get("https://api.example.com/encomendas");
+        const response = await axios.get("http://localhost:8080/entregas");
         setEncomendas(response.data);
       } catch (error) {
         console.error("Erro ao buscar as encomendas:", error);

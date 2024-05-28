@@ -71,7 +71,6 @@ function Cabecalho() {
       <ButtonContainer>
       <ImageWrapper>
         <StyledImage
-          loading="lazy"
           src="https://cdn.builder.io/api/v1/image/assets/TEMP/8156a6a6eae06084f8a1efcbad5dddf49aa3c449142c963fe9e5efa1453377c0?apiKey=47f1cd04243243c1a2a2819ee899bf9a&"
         />
       </ImageWrapper>
@@ -80,7 +79,6 @@ function Cabecalho() {
     <ButtonContainer>
       <ImageWrapper>
         <StyledImage
-          loading="lazy"
           src="https://cdn.builder.io/api/v1/image/assets/TEMP/8156a6a6eae06084f8a1efcbad5dddf49aa3c449142c963fe9e5efa1453377c0?apiKey=47f1cd04243243c1a2a2819ee899bf9a&"
         />
       </ImageWrapper>
