@@ -80,6 +80,7 @@ const ContentWrapper = styled.div`
   align-items: center;
   margin-top: 20px;
   margin-bottom: 4vh;
+  margin-right: 8vw;
 `;
 
 const CriarContaWrapper = styled.div`

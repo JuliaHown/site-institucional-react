@@ -109,7 +109,7 @@ const FormularioLogin = () => {
           />
           <EyeIcon
             src="https://cdn.builder.io/api/v1/image/assets/TEMP/1f93281bd2e155dc8346c0ad62b4de0485e1878ce0a3711af246595a6810b08e?apiKey=47f1cd04243243c1a2a2819ee899bf9a&"
-            alt="Toggle password visibility"
+            alt="ícone de olho para mostrar a senha"
             onClick={togglePasswordVisibility}
           />
         </PasswordField>
@@ -143,7 +143,7 @@ const RequiredIndicator = styled.span`
 `;
 
 const Input = styled.input`
-  width: 100%;
+  width: 160%;
   margin-top: 15px;
   padding: 19px 24px;
   border-radius: 16px;
@@ -163,7 +163,7 @@ const EmailInput = styled(Input)``;
 const PasswordField = styled.div`
   display: flex;
   align-items: center;
-  width: 100%;
+  width: 160%;
   margin-top: 15px;
   padding: 15px 21px;
   border-radius: 16px;
@@ -204,7 +204,7 @@ const Botao = styled.button`
   align-items: center;
   border-radius: 13px;
   background-color: #50623a;
-  width: 100%;
+  width: 120%;
   color: #fff;
   text-align: center;
   letter-spacing: -0.28px;
@@ -214,7 +214,8 @@ const Botao = styled.button`
   cursor: pointer;
   transition: background-color 0.3s ease;
   white-space: nowrap;
-  margin-top: 25px;
+  margin-top: 5vh;
+  margin-left: 3vw;
 
   &:hover {
     background-color: #3c4d2b;
