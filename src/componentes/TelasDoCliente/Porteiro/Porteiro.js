@@ -1,6 +1,6 @@
 import React from "react";
 import Style from "../ClientStyle";
-import ListaPorteiros from "./Componentes/Tabela/ListaPorteiro";
+import ListaPorteiros from "./Componentes/Tabela/TabelaPorteiro";
 import styled from "styled-components";
 import MenuLateral from "../CadastroEncomenda/Componentes/Sidebar";
 import Logo from "../Logo/LogoEmpresa";
@@ -13,7 +13,9 @@ const Porteiros = () => (
       <LogoWrapper>
         <Logo />
       </LogoWrapper>
-      <ListaPorteiros />
+      <ListaPorteirosWrapper>
+        <ListaPorteiros />
+      </ListaPorteirosWrapper>
     </ContentWrapper>
   </ContainerWrapper>
 );
@@ -48,6 +50,10 @@ const LogoWrapper = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 5vh;
+`;
+
+const ListaPorteirosWrapper = styled.div`
+  padding: 40px;
 `;
 
 export default Porteiros;
