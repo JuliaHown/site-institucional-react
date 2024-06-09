@@ -4,6 +4,8 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Pagination from "react-bootstrap/Pagination";
 import Table from "react-bootstrap/Table";
+import axios from "axios";
+import authService from "../../../../../api/services/authService"
 import { validarNome, validarCelular, validarRG } from "./ValidacoesPorteiro";
 import { FaEdit, FaTrash } from "react-icons/fa";
 
@@ -19,17 +21,19 @@ export default function TabelaAp() {
     // LÓGICA DA REQUISIÇÃO AQUI
     // Esses dados são só para simular, pode usar o espaço para fazer a lógica da requisição
     const buscarDados = async () => {
-      const dadosDoBanco = [
-        {
-          id: 1,
-          nome: "Wesley dos Santos",
-          email: "wesley@gmail.com",
-          turno: "Manhã",
-          rg: "472857447",
-          celular: "(00) 99999-9999",
-        },
-      ];
-      setDadosTabela(dadosDoBanco);
+        try {
+        const user = authService.getCurrentUser();
+        const token = user.token;
+        const config = {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        };
+        const response = await axios.get("http://172.206.254.101:8080/porteiros", config);
+        setDadosTabela(response.data);
+      } catch (error) {
+        console.error("Erro ao buscar os porteiros:", error);
+      }
     };
 
     buscarDados();
@@ -37,7 +41,7 @@ export default function TabelaAp() {
 
   //NOVA LINHA
 
-  const adicionarNovaLinha = () => {
+  const adicionarNovaLinha = async () => {
     const novoId = ultimoId ? ultimoId + 1 : 1;
     const novaLinha = {
       id: novoId,
@@ -47,10 +51,25 @@ export default function TabelaAp() {
       rg: "",
       celular: "",
     };
-    setDadosTabela([novaLinha, ...dadosTabela]);
-    setIdLinhaEdicao(novoId);
-    setLinhaVaziaId(novoId);
-    setUltimoId(novoId); // Atualiza o último ID
+    try {
+      const user = authService.getCurrentUser();
+      const token = user.token;
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      };
+      // Alterar a URL da requisição para incluir o ID do condomínio
+      await axios.post(`http://172.206.254.101:8080/porteiros`, novaLinha, config);
+      // Atualizar a lista de apartamentos após a adição bem-sucedida
+      const response = await axios.get(`http://172.206.254.101:8080/porteiros`, config);
+      setDadosTabela(response.data);
+      setIdLinhaEdicao(null);
+      setLinhaVaziaId(null);
+      setUltimoId(novoId); // Atualiza o último ID
+    } catch (error) {
+      console.error("Erro ao adicionar porteiros:", error);
+    }
   };
 
   // VALIDAÇÕES//
@@ -79,7 +98,7 @@ export default function TabelaAp() {
   };
 
   // SALVAR NOVA LINHA
-  const salvarLinha = (id) => {
+  const salvarLinha = async (id) => {
     const indiceLinha = dadosTabela.findIndex((linha) => linha.id === id);
     const linha = dadosTabela[indiceLinha];
     // Verificar se todos os campos obrigatórios estão preenchidos, exceto o campo "Bloco"
@@ -96,8 +115,22 @@ export default function TabelaAp() {
     if (!camposObrigatoriosPreenchidos) {
       return;
     }
-    setIdLinhaEdicao(null);
-    setLinhaVaziaId(null);
+    try {
+      const user = authService.getCurrentUser();
+      const token = user.token;
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      };
+      await axios.post(`http://172.206.254.101:8080/porteiros`, linha, config);
+      const response = await axios.get(`http://172.206.254.101:8080/porteiros`, config);
+      setDadosTabela(response.data);
+      setIdLinhaEdicao(null);
+      setLinhaVaziaId(null);
+    } catch (error) {
+      console.error("Erro ao cadastrar porteiros:", error);
+    }
   };
 
   const excluirLinha = (id) => {

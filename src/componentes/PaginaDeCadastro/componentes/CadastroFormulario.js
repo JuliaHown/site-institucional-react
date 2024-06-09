@@ -78,7 +78,7 @@ function FormularioCadastro() {
     }
 
     try {
-      const response = await axios.post("http://localhost:8080/clientes", {
+      const response = await axios.post("http://172.206.254.101:8080/clientes", {
         nome,
         email,
         telefone,
@@ -89,7 +89,7 @@ function FormularioCadastro() {
         toast.success("Cadastro concluído com sucesso!");
         
         // Autenticar usuário após cadastro
-        const loginResponse = await axios.post("http://localhost:8080/clientes/login", {
+        const loginResponse = await axios.post("http://172.206.254.101:8080/clientes/login", {
           email,
           senha,
         });

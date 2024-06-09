@@ -5,7 +5,15 @@ import Form from "react-bootstrap/Form";
 import Pagination from 'react-bootstrap/Pagination';
 import Table from "react-bootstrap/Table";
 import axios from "axios"; // Importar o Axios
-import authService from './authService'; // Importar o serviço de autenticação
+import authService from "../../../../../api/services/authService"; // Importar o serviço de autenticação
+import {
+  validarNumero,
+  validarAlfabeto,
+  validarEmail,
+  validarBloco,
+  validarCelular,
+  validarFixo
+} from "./ValidacoesAp";
 import { FaEdit, FaTrash } from "react-icons/fa";
 
 export default function TabelaAp({ condominioId }) {
@@ -28,8 +36,8 @@ export default function TabelaAp({ condominioId }) {
             Authorization: `Bearer ${token}`
           }
         };
-        const response = await axios.get("http://localhost:8080/apartamentos", config);
-        setApartamentos(response.data);
+        const response = await axios.get("http://172.206.254.101:8080/apartamentos", config);
+        setDadosTabela(response.data);
       } catch (error) {
         console.error("Erro ao buscar os apartamentos:", error);
       }
@@ -59,9 +67,9 @@ export default function TabelaAp({ condominioId }) {
         }
       };
       // Alterar a URL da requisição para incluir o ID do condomínio
-      await axios.post(`http://localhost:8080/apartamentos/${condominioId}`, novaLinha, config);
+      await axios.post(`http://172.206.254.101:8080/apartamentos/${condominioId}`, novaLinha, config);
       // Atualizar a lista de apartamentos após a adição bem-sucedida
-      const response = await axios.get(`http://localhost:8080/apartamentos/${condominioId}`, config);
+      const response = await axios.get(`http://172.206.254.101:8080/apartamentos/${condominioId}`, config);
       setDadosTabela(response.data);
       setIdLinhaEdicao(null);
       setLinhaVaziaId(null);
@@ -121,8 +129,8 @@ export default function TabelaAp({ condominioId }) {
           Authorization: `Bearer ${token}`
         }
       };
-      await axios.post(`http://localhost:8080/apartamentos/${linha.condominioId}`, linha, config);
-      const response = await axios.get(`http://localhost:8080/apartamentos/${linha.condominioId}`, config);
+      await axios.post(`http://172.206.254.101:8080/apartamentos/${linha.condominioId}`, linha, config);
+      const response = await axios.get(`http://172.206.254.101:8080/apartamentos/${linha.condominioId}`, config);
       setDadosTabela(response.data);
       setIdLinhaEdicao(null);
       setLinhaVaziaId(null);
@@ -168,6 +176,22 @@ export default function TabelaAp({ condominioId }) {
     );
     // Se algum campo obrigatório estiver vazio (exceto "Bloco"), o botão Salvar estará desativado
     return algumCampoObrigatorioVazio;
+  };
+
+  const excluirLinha = async (id) => {
+    try {
+      const user = authService.getCurrentUser();
+      const token = user.token;
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      await axios.delete(`http://172.206.254.101:8080/apartamentos/${id}`, config);
+      setDadosTabela(dadosTabela.filter((linha) => linha.id !== id));
+    } catch (error) {
+      console.error("Erro ao excluir apartamento:", error);
+    }
   };
 
   // PAGINAÇÃO

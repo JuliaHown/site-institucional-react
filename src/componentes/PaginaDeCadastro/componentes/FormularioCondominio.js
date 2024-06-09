@@ -98,7 +98,7 @@ function PaginaCondominio() {
     }
 
     try {
-      const response = await axios.post("http://localhost:8080/condominios", {
+      const response = await axios.post("http://172.206.254.101:8080/condominios", {
         nome,
         cep,
         logradouro,

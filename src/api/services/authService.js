@@ -1,7 +1,7 @@
 import axios from 'axios';
-import jwt_decode from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 
-const API_URL = 'http://localhost:8080';
+const API_URL = 'http://172.206.254.101:8080/';
 
 class AuthService {
   async login(email, senha) {
@@ -28,7 +28,7 @@ class AuthService {
   getRoles() {
     const user = this.getCurrentUser();
     if (user) {
-      const decodedToken = jwt_decode(user.token);
+      const decodedToken = jwtDecode(user.token);
       return decodedToken.roles;
     }
     return [];
