@@ -39,7 +39,12 @@ const LoginButton = styled.a`
   border: none;
   cursor: pointer;
   white-space: nowrap;
-  text-decoration: none; /* Removido o sublinhado */
+  text-decoration: none;
+
+  &:hover {
+    background-color: #40512b; 
+    color: #e0e0e0; 
+  }
 `;
 
 export default Header;
