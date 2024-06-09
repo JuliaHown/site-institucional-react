@@ -11,7 +11,6 @@ function FormularioCadastro() {
   const [email, setEmail] = useState("");
   const [emailValido, setEmailValido] = useState(true);
   const [telefone, setTelefone] = useState("");
-  // const [telefoneValido, setTelefoneValido] = useState(true);
   const [senha, setSenha] = useState("");
   const [senhaValida, setSenhaValida] = useState(true);
   const [nome, setNome] = useState("");
@@ -36,10 +35,6 @@ function FormularioCadastro() {
       setTelefone(formatarTelefone(novoTelefone));
     }
   };
-
-  // const handleBlurTelefone = () => {
-  //   setTelefoneValido(telefone.length <= 11);
-  // };
 
   const handleChangeSenha = (event) => {
     const novaSenha = event.target.value;
@@ -76,11 +71,6 @@ function FormularioCadastro() {
       return;
     }
 
-    // if (!telefoneValido) {
-    //   toast.error("O telefone deve conter exatamente 11 dígitos.");
-    //   return;
-    // }
-
     if (!validarSenha(senha)) {
       setSenhaValida(false);
       toast.error("Senha deve ter no mínimo 6 caracteres.");
@@ -97,9 +87,19 @@ function FormularioCadastro() {
 
       if (response.status === 201) {
         toast.success("Cadastro concluído com sucesso!");
-        setTimeout(() => {
-          window.location.href = "/cadastrarcondominio";
-        }, 3000); // Redireciona após 3 segundos
+        
+        // Autenticar usuário após cadastro
+        const loginResponse = await axios.post("http://localhost:8080/clientes/login", {
+          email,
+          senha,
+        });
+
+        if (loginResponse.data.token) {
+          localStorage.setItem('user', JSON.stringify(loginResponse.data));
+          setTimeout(() => {
+            window.location.href = "/cadastrarcondominio";
+          }, 3000); // Redireciona após 3 segundos
+        }
       }
     } catch (error) {
       if (error.response && error.response.data && error.response.data.message) {
@@ -151,11 +151,7 @@ function FormularioCadastro() {
             placeholder="(00) 99999-9999"
             value={telefone}
             onChange={handleChangeTelefone}
-            // onBlur={handleBlurTelefone}
           />
-          {/* {!telefoneValido && (
-            <span style={{ color: "red" }}>Telefone deve ter exatamente 11 dígitos</span>
-          )} */}
         </CampoInputCadastro>
 
         <CampoInputCadastro>

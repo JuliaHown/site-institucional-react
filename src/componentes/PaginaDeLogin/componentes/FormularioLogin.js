@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import axios from "axios";
+import authService from "../services/authService";
 
 const FormularioLogin = () => {
   const [email, setEmail] = useState("");
@@ -42,29 +42,12 @@ const FormularioLogin = () => {
     setError(null);
 
     try {
-      const response = await axios.post(
-        "http://localhost:8080/clientes/login",
-        {
-          email,
-          senha,
-        }
-      );
-
-      if (response.status === 200) {
+      const response = await authService.login(email, senha);
+      if (response) {
         window.location.href = "/cadastrar-encomenda";
       }
     } catch (error) {
       console.error("Erro ao fazer login:", error);
-
-      if (error.response) {
-        console.error("Erro de resposta da API:", error.response.data);
-        console.error("Status do erro:", error.response.status);
-      } else if (error.request) {
-        console.error("Erro de requisição:", error.request);
-      } else {
-        console.error("Erro ao processar requisição:", error.message);
-      }
-
       setError("Ocorreu um erro ao fazer login. Por favor, tente novamente.");
     }
 

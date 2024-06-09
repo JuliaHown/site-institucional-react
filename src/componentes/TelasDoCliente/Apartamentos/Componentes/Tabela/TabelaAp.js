@@ -4,16 +4,11 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Pagination from 'react-bootstrap/Pagination';
 import Table from "react-bootstrap/Table";
-import {
-  validarCelular,
-  validarFixo,
-  validarNumero,
-  validarAlfabeto,
-  validarBloco,
-} from "./ValidacoesAp";
+import axios from "axios"; // Importar o Axios
+import authService from './authService'; // Importar o serviço de autenticação
 import { FaEdit, FaTrash } from "react-icons/fa";
 
-export default function TabelaAp() {
+export default function TabelaAp({ condominioId }) {
   const [dadosTabela, setDadosTabela] = useState([]);
   const [idLinhaEdicao, setIdLinhaEdicao] = useState(null);
   const [linhaVaziaId, setLinhaVaziaId] = useState(null);
@@ -25,38 +20,55 @@ export default function TabelaAp() {
     // LÓGICA DA REQUISIÇÃO AQUI
     // Esses dados são só para simular, pode usar o espaço para fazer a lógica da requisição
     const buscarDados = async () => {
-      const dadosDoBanco = [
-        {
-          id: 1,
-          numeroAp: "101",
-          nome: "João da Silva",
-          email: "joao@gmail.com",
-          bloco: "1A",
-          celular: "(00) 99999-9999",
-          fixo: "(00) 9999-9999",
-        },
-      ];
-      setDadosTabela(dadosDoBanco);
+      try {
+        const user = authService.getCurrentUser();
+        const token = user.token;
+        const config = {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        };
+        const response = await axios.get("http://localhost:8080/apartamentos", config);
+        setApartamentos(response.data);
+      } catch (error) {
+        console.error("Erro ao buscar os apartamentos:", error);
+      }
     };
 
     buscarDados();
   }, []);
 
-  const adicionarNovaLinha = () => {
+  const adicionarNovaLinha = async () => {
     const novoId = ultimoId ? ultimoId + 1 : 1;
     const novaLinha = {
-      id: novoId,
       numeroAp: "",
       nome: "",
       email: "",
       bloco: "",
       celular: "",
       fixo: "",
+      condominioId: condominioId
     };
-    setDadosTabela([novaLinha, ...dadosTabela]);
-    setIdLinhaEdicao(novoId);
-    setLinhaVaziaId(novoId);
-    setUltimoId(novoId); // Atualiza o último ID
+    // Adicionar a lógica de adição do novo apartamento aqui
+    try {
+      const user = authService.getCurrentUser();
+      const token = user.token;
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      };
+      // Alterar a URL da requisição para incluir o ID do condomínio
+      await axios.post(`http://localhost:8080/apartamentos/${condominioId}`, novaLinha, config);
+      // Atualizar a lista de apartamentos após a adição bem-sucedida
+      const response = await axios.get(`http://localhost:8080/apartamentos/${condominioId}`, config);
+      setDadosTabela(response.data);
+      setIdLinhaEdicao(null);
+      setLinhaVaziaId(null);
+      setUltimoId(novoId); // Atualiza o último ID
+    } catch (error) {
+      console.error("Erro ao adicionar apartamento:", error);
+    }
   };
 
   // VALIDAÇÕES//
@@ -97,29 +109,26 @@ export default function TabelaAp() {
   };
 
   // SALVAR NOVA LINHA
-  const salvarLinha = (id) => {
+  const salvarLinha = async (id) => {
     const indiceLinha = dadosTabela.findIndex((linha) => linha.id === id);
     const linha = dadosTabela[indiceLinha];
-    // Verificar se todos os campos obrigatórios estão preenchidos, exceto o campo "Bloco"
-    const camposObrigatoriosPreenchidos = Object.entries(linha).every(
-      ([chave, valor]) => {
-        // Verificar se a chave não é "bloco" e se o valor é vazio
-        if (chave !== "bloco" && valor === "") {
-          return false;
+    // Adicionar a lógica de atualização do apartamento aqui
+    try {
+      const user = authService.getCurrentUser();
+      const token = user.token;
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`
         }
-        return true;
-      }
-    );
-    // Se algum campo obrigatório estiver vazio (exceto "Bloco"), retorna sem salvar a linha
-    if (!camposObrigatoriosPreenchidos) {
-      return;
+      };
+      await axios.post(`http://localhost:8080/apartamentos/${linha.condominioId}`, linha, config);
+      const response = await axios.get(`http://localhost:8080/apartamentos/${linha.condominioId}`, config);
+      setDadosTabela(response.data);
+      setIdLinhaEdicao(null);
+      setLinhaVaziaId(null);
+    } catch (error) {
+      console.error("Erro ao cadastrar apartamento:", error);
     }
-    setIdLinhaEdicao(null);
-    setLinhaVaziaId(null);
-  };
-
-  const excluirLinha = (id) => {
-    setDadosTabela(dadosTabela.filter((linha) => linha.id !== id));
   };
 
   // CANCELAR A NOVA LINHA ADICIONADA

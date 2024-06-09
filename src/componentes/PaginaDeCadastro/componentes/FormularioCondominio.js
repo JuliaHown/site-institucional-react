@@ -108,7 +108,8 @@ function PaginaCondominio() {
       });
 
       if (response.status === 201) {
-        navigate("/login");
+        const condominioId = response.data.id; 
+        navigate(`/cadastro-apartamento/${condominioId}`);
       }
     } catch (error) {
       console.error("Erro ao cadastrar condomínio:", error);

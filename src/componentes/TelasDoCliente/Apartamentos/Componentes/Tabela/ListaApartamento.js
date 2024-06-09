@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
+import authService from './authService'; // Importe o serviço de autenticação
 
 function TabelaApartamento() {
   const [apartamentos, setApartamentos] = useState([]);
@@ -11,7 +12,14 @@ function TabelaApartamento() {
   useEffect(() => {
     const fetchApartamentos = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/apartamentos");
+        const user = authService.getCurrentUser();
+        const token = user.token;
+        const config = {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        };
+        const response = await axios.get("http://localhost:8080/apartamentos", config);
         setApartamentos(response.data);
       } catch (error) {
         console.error("Erro ao buscar os apartamentos:", error);
@@ -20,7 +28,6 @@ function TabelaApartamento() {
 
     fetchApartamentos();
   }, []);
-
   useEffect(() => {
     const novoApartamento = {
       apartamento: "101",
