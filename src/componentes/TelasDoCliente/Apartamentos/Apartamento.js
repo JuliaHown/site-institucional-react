@@ -1,6 +1,6 @@
 import React from "react";
 import Style from "../ClientStyle";
-import ListaEncomenda from "./Componentes/Tabela/ListaApartamento";
+import ListaApartamentos from "./Componentes/Tabela/TabelaAp";
 import styled from "styled-components";
 import MenuLateral from "../CadastroEncomenda/Componentes/Sidebar";
 import Logo from "../Logo/LogoEmpresa";
@@ -13,7 +13,9 @@ const Apartamentos = () => (
       <LogoWrapper>
         <Logo />
       </LogoWrapper>
-      <ListaEncomenda />
+      <ListaApartamentosWrapper>
+        <ListaApartamentos />
+      </ListaApartamentosWrapper>
     </ContentWrapper>
   </ContainerWrapper>
 );
@@ -48,6 +50,10 @@ const LogoWrapper = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 5vh;
+`;
+
+const ListaApartamentosWrapper = styled.div`
+  padding: 40px;
 `;
 
 export default Apartamentos;
