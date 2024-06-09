@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
+import axios from "axios";
 
 function CadastrarEncomendas() {
   const [validated, setValidated] = useState(false);
@@ -13,6 +14,7 @@ function CadastrarEncomendas() {
     dataRecebimento: "",
     dataEntrega: "",
   });
+  const [dateError, setDateError] = useState(false);
 
   useEffect(() => {
     const today = new Date();
@@ -26,25 +28,51 @@ function CadastrarEncomendas() {
       2,
       "0"
     )}/${brDate.getFullYear()}`;
+    const formattedInputDate = `${brDate.getFullYear()}-${String(
+      brDate.getMonth() + 1
+    ).padStart(2, "0")}-${String(brDate.getDate()).padStart(2, "0")}`;
     setFormData((prevData) => ({
       ...prevData,
       dataRecebimento: formattedDate,
+      formattedRecebimento: formattedInputDate,
     }));
   }, []);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
+    const dataRecebimento = new Date(formData.formattedRecebimento);
+    const dataEntrega = new Date(formData.dataEntrega);
+
+    if (dataEntrega < dataRecebimento) {
+      setDateError(true);
+      return;
+    } else {
+      setDateError(false);
+      if (form.checkValidity() === false) {
+        setValidated(true);
+        return;
+      }
     }
 
     setValidated(true);
+
+    // Fazer a requisição POST para a API Java utilizando Axios
+    try {
+      const response = await axios.post("url_da_sua_api", formData);
+      console.log("Encomenda cadastrada com sucesso!");
+      console.log(response.data);
+    } catch (error) {
+      console.error("Erro ao cadastrar encomenda:", error.message);
+    }
   };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setFormData({ ...formData, [name]: value });
+    // Verificar se o valor inserido contém apenas letras
+    if (/^[a-zA-Z]+$/.test(value) || value === "") {
+      setFormData({ ...formData, [name]: value });
+    }
   };
 
   return (
@@ -83,7 +111,6 @@ function CadastrarEncomendas() {
               Bloco do Destinatário
             </Form.Label>
             <Form.Control
-              required
               type="text"
               placeholder="Digite o bloco do destinatário"
               name="blocoDestinatario"
@@ -91,6 +118,7 @@ function CadastrarEncomendas() {
               onChange={handleChange}
             />
           </Form.Group>
+
           <Form.Group
             as={Col}
             md="4"
@@ -162,7 +190,17 @@ function CadastrarEncomendas() {
               name="dataEntrega"
               value={formData.dataEntrega}
               onChange={handleChange}
+              isInvalid={dateError}
+              className={dateError ? "is-invalid" : ""}
             />
+            <Form.Control.Feedback
+              type="invalid"
+              style={{ display: dateError ? "block" : "none" }}
+            >
+              {formData.dataEntrega < formData.formattedRecebimento
+                ? "A data deve ser posterior a data de recebimento"
+                : null}
+            </Form.Control.Feedback>
           </Form.Group>
         </Col>
 

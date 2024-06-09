@@ -3,9 +3,9 @@ import Style from "../ClientStyle";
 import styled from "styled-components";
 import MenuLateral from "../CadastroEncomenda/Componentes/Sidebar";
 import Logo from "../Logo/LogoEmpresa";
-import FormCadastrar from "./Componentes/ContentCadastrar"
+import FormCadastrar from "./Componentes/ContentCadastrar";
 
-const Porteiros = () => (
+const CadastrarEncomenda = () => (
   <ContainerWrapper>
     <Style />
     <MenuLateral />
@@ -14,8 +14,8 @@ const Porteiros = () => (
         <Logo />
       </LogoWrapper>
       <Formulario>
-      <FormCadastrar/>
-    </Formulario>
+        <FormCadastrar />
+      </Formulario>
     </ContentWrapper>
   </ContainerWrapper>
 );
@@ -37,7 +37,7 @@ const ContentWrapper = styled.div`
   max-width: 80%;
   display: flex;
   flex-direction: column;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
 
   @media (max-width: 991px) {
     max-width: 100%;
@@ -57,4 +57,4 @@ const Formulario = styled.div`
   margin-left: 5vw;
 `;
 
-export default Porteiros;
+export default CadastrarEncomenda;
