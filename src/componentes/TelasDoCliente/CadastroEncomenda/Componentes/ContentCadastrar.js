@@ -85,7 +85,7 @@ function CadastrarEncomendas() {
         <Col className="mb-4">
           <Form.Group
             as={Col}
-            md="4"
+            md="8"
             controlId="validationCustom01"
             className="mb-2"
           >
@@ -103,7 +103,7 @@ function CadastrarEncomendas() {
           </Form.Group>
           <Form.Group
             as={Col}
-            md="4"
+            md="8"
             controlId="validationCustom02"
             className="mb-2"
           >
@@ -121,7 +121,7 @@ function CadastrarEncomendas() {
 
           <Form.Group
             as={Col}
-            md="4"
+            md="8"
             controlId="validationCustom03"
             className="mb-2"
           >
@@ -141,7 +141,7 @@ function CadastrarEncomendas() {
         <Col>
           <Form.Group
             as={Col}
-            md="4"
+            md="8"
             controlId="validationCustom04"
             className="mb-2"
           >
@@ -160,7 +160,7 @@ function CadastrarEncomendas() {
           </Form.Group>
           <Form.Group
             as={Col}
-            md="4"
+            md="8"
             controlId="validationCustom05"
             className="mb-2"
           >
@@ -177,9 +177,9 @@ function CadastrarEncomendas() {
           </Form.Group>
           <Form.Group
             as={Col}
-            md="4"
+            md="8"
             controlId="validationCustom06"
-            className="mb-2"
+            className="mb-4"
           >
             <Form.Label className="form-label-sm">
               Data de entrega ao destinatário

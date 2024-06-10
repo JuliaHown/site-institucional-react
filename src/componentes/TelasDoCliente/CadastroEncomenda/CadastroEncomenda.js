@@ -4,6 +4,7 @@ import styled from "styled-components";
 import MenuLateral from "../CadastroEncomenda/Componentes/Sidebar";
 import Logo from "../Logo/LogoEmpresa";
 import FormCadastrar from "./Componentes/ContentCadastrar";
+import ImagemCadastro from "../../../assets/imgCadastroEncomenda.png";
 
 const CadastrarEncomenda = () => (
   <ContainerWrapper>
@@ -13,9 +14,14 @@ const CadastrarEncomenda = () => (
       <LogoWrapper>
         <Logo />
       </LogoWrapper>
-      <Formulario>
-        <FormCadastrar />
-      </Formulario>
+      <MainContent>
+        <Formulario>
+          <FormCadastrar />
+        </Formulario>
+        <ImageWrapper>
+          <img src={ImagemCadastro} alt="Imagem Cadastro" />
+        </ImageWrapper>
+      </MainContent>
     </ContentWrapper>
   </ContainerWrapper>
 );
@@ -49,12 +55,35 @@ const ContentWrapper = styled.div`
 const LogoWrapper = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 5vh;
+  margin-top: 4vh;
   margin-bottom: 2vh;
 `;
 
+const MainContent = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  height: 100%;
+  widh: 100%;
+`;
+
 const Formulario = styled.div`
-  margin-left: 5vw;
+  flex: 1;
+  margin-left: 7vw;
+`;
+
+const ImageWrapper = styled.div`
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 1vw;
+  
+  img {
+    max-width: 96%;
+    max-height: 99%;
+    object-fit: cover;
+  }
 `;
 
 export default CadastrarEncomenda;
