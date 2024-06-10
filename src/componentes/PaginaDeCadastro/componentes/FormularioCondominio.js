@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import { CampoInputCadastro, InputCadastro, Label } from "./styledComponents";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from "react-router-dom";
 import { validarCEP, validarNumero, validarPreenchido } from "./Validacoes";
 
@@ -73,7 +75,7 @@ function PaginaCondominio() {
     }
   };
 
-  const handleNomeChange = (event) => {
+  function handleNomeChange(event) {
     const nomeInput = event.target.value;
     if (!/^[\w\s\u00C0-\u00FF]+$/.test(nomeInput)) {
       setError("Apenas caracteres alfanuméricos e acentuações padrões são permitidos");
@@ -84,8 +86,9 @@ function PaginaCondominio() {
     }
   };
 
-  const handleSubmit = async (event) => {
+  async function handleSubmit(event) {
     event.preventDefault();
+  
     if (
       !validarCEP(cep) ||
       !validarNumero(numero) ||
@@ -97,122 +100,152 @@ function PaginaCondominio() {
       return;
     }
 
+    const dadosCliente = JSON.parse(localStorage.getItem('user'));
+  
     try {
-      const response = await axios.post("http://172.206.254.101:8080/condominios", {
-        nome,
-        cep,
-        logradouro,
-        numero,
-        bairro,
-        cidade,
+      // Cadastro do cliente
+      const response = await axios.post("http://172.206.254.101:8080/clientes", {
+        nome: dadosCliente.nome,
+        email: dadosCliente.email,
+        telefone: dadosCliente.telefone,
+        senha: dadosCliente.senha,
       });
-
+  
       if (response.status === 201) {
-        const condominioId = response.data.id; 
-        navigate(`/cadastro-apartamento/${condominioId}`);
+        toast.success("Cadastro concluído com sucesso!");
+  
+        // Autenticar usuário após cadastro
+        const loginResponse = await axios.post("http://172.206.254.101:8080/clientes/login", {
+          email: dadosCliente.email,
+          senha: dadosCliente.senha,
+        });
+  
+        if (loginResponse.status === 200) {
+          localStorage.setItem('user', loginResponse.data.data.userId);
+  
+          // Cadastro do condomínio
+          const condominioResponse = await axios.post("http://172.206.254.101:8080/condominios", {
+            nome,
+            cep,
+            logradouro,
+            numero,
+            bairro,
+            cidade,
+            fkCliente: localStorage.getItem('user')
+          });
+  
+          if (condominioResponse.status === 201) {
+            navigate(`/apartamentos`);
+          }
+        }
       }
     } catch (error) {
-      console.error("Erro ao cadastrar condomínio:", error);
+      if (error.response && error.response.data && error.response.data.message) {
+        toast.error(error.response.data.message);
+      } else {
+        toast.error("Erro ao cadastrar usuário. Por favor, tente novamente.");
+      }
+      console.error("Erro ao cadastrar usuário:", error);
     }
-  };
+  }
+      
+const isFormValid =
+      validarCEP(cep) &&
+      validarNumero(numero) &&
+      validarPreenchido(logradouro) &&
+      validarPreenchido(bairro) &&
+      validarPreenchido(cidade);
 
-  const isFormValid =
-    validarCEP(cep) &&
-    validarNumero(numero) &&
-    validarPreenchido(logradouro) &&
-    validarPreenchido(bairro) &&
-    validarPreenchido(cidade);
+    return (
+      <Formulario>
+        <form onSubmit={handleSubmit}>
+          <CampoInputCadastro>
+            <Label htmlFor="nomeInput">Nome do Condomínio</Label>
+            <InputCadastro
+              type="text"
+              id="nomeInput"
+              placeholder="Digite o nome do condomínio"
+              value={nome}
+              onChange={handleNomeChange}
+              disabled={loading}
+            />
+          </CampoInputCadastro>
 
-  return (
-    <Formulario>
-      <form onSubmit={handleSubmit}>
-        <CampoInputCadastro>
-          <Label htmlFor="nomeInput">Nome do Condomínio</Label>
-          <InputCadastro
-            type="text"
-            id="nomeInput"
-            placeholder="Digite o nome do condomínio"
-            value={nome}
-            onChange={handleNomeChange}
-            disabled={loading}
-          />
-        </CampoInputCadastro>
+          <CampoInputCadastro>
+            <Label htmlFor="cepInput">CEP*</Label>
+            <InputCadastro
+              type="text"
+              id="cepInput"
+              placeholder="Digite o CEP"
+              value={cep}
+              onChange={handleCepChange}
+              maxLength="9"
+              disabled={loading}
+            />
+            <ErrorPopup show={error !== ""}>{error}</ErrorPopup>
+          </CampoInputCadastro>
 
-        <CampoInputCadastro>
-          <Label htmlFor="cepInput">CEP*</Label>
-          <InputCadastro
-            type="text"
-            id="cepInput"
-            placeholder="Digite o CEP"
-            value={cep}
-            onChange={handleCepChange}
-            maxLength="9"
-            disabled={loading}
-          />
-          <ErrorPopup show={error !== ""}>{error}</ErrorPopup>
-        </CampoInputCadastro>
+          {isFormVisible && (
+            <>
+              <CampoInputCadastro>
+                <Label>Logradouro</Label>
+                <InputCadastro
+                  type="text"
+                  value={logradouro}
+                  onChange={(e) => setLogradouro(e.target.value)}
+                  placeholder="Logradouro"
+                  disabled={loading}
+                />
+              </CampoInputCadastro>
 
-        {isFormVisible && (
-          <>
-            <CampoInputCadastro>
-              <Label>Logradouro</Label>
-              <InputCadastro
-                type="text"
-                value={logradouro}
-                onChange={(e) => setLogradouro(e.target.value)}
-                placeholder="Logradouro"
-                disabled={loading}
-              />
-            </CampoInputCadastro>
+              <CampoInputCadastro>
+                <Label>Número*</Label>
+                <InputCadastro
+                  type="text"
+                  value={numero}
+                  onChange={handleNumeroChange}
+                  placeholder="Número"
+                  disabled={loading}
+                />
+              </CampoInputCadastro>
 
-            <CampoInputCadastro>
-              <Label>Número*</Label>
-              <InputCadastro
-                type="text"
-                value={numero}
-                onChange={handleNumeroChange}
-                placeholder="Número"
-                disabled={loading}
-              />
-            </CampoInputCadastro>
+              <CampoInputCadastro>
+                <Label>Bairro</Label>
+                <InputCadastro
+                  type="text"
+                  value={bairro}
+                  readOnly
+                  placeholder="Bairro"
+                  disabled={loading}
+                />
+              </CampoInputCadastro>
 
-            <CampoInputCadastro>
-              <Label>Bairro</Label>
-              <InputCadastro
-                type="text"
-                value={bairro}
-                readOnly
-                placeholder="Bairro"
-                disabled={loading}
-              />
-            </CampoInputCadastro>
+              <CampoInputCadastro>
+                <Label>Cidade</Label>
+                <InputCadastro
+                  type="text"
+                  value={cidade}
+                  readOnly
+                  placeholder="Cidade"
+                  disabled={loading}
+                />
+              </CampoInputCadastro>
+            </>
+          )}
 
-            <CampoInputCadastro>
-              <Label>Cidade</Label>
-              <InputCadastro
-                type="text"
-                value={cidade}
-                readOnly
-                placeholder="Cidade"
-                disabled={loading}
-              />
-            </CampoInputCadastro>
-          </>
-        )}
+          <Botao type="submit" disabled={!isFormValid || loading}>
+            Cadastrar Condomínio
+          </Botao>
+        </form>
+      </Formulario>
+    );
+  }
 
-        <Botao type="submit" disabled={!isFormValid || loading}>
-          Cadastrar Condomínio
-        </Botao>
-      </form>
-    </Formulario>
-  );
-}
-
-const Formulario = styled.div`
+  const Formulario = styled.div`
   margin-left: 12vw;
 `;
 
-const ErrorPopup = styled.div`
+  const ErrorPopup = styled.div`
   position: absolute;
   top: calc(100% + 5px);
   left: 0;
@@ -223,7 +256,7 @@ const ErrorPopup = styled.div`
   display: ${({ show }) => (show ? "block" : "none")};
 `;
 
-const Botao = styled.button`
+  const Botao = styled.button`
   border-radius: 16px;
   background-color: ${({ disabled }) => (disabled ? "#708470" : "#123312")};
   color: #fff;
@@ -246,4 +279,4 @@ const Botao = styled.button`
   }
 `;
 
-export default PaginaCondominio;
+  export default PaginaCondominio;

@@ -3,8 +3,8 @@ import Style from "../../TelasDoCliente/ClientStyle";
 import styled from "styled-components";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
 import MenuLateral from "../CadastroEncomenda/Componentes/Sidebar";
-import InfoDoCondominio from "./componentes/InfoCondominio";
-import InfoDoSindico from "./componentes/InfoSindico";
+import InfoDoCondominio from "../PaginaInicial/Componentes/InfoCondominio";
+import InfoDoSindico from "../PaginaInicial/Componentes/InfoSindico";
 
 const PaginaPrincipal = () => (
   <Principal>

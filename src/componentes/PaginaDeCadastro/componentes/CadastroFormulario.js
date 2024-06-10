@@ -5,6 +5,7 @@ import axios from "axios";
 import { validarEmail, formatarTelefone, validarSenha } from "./Validacoes";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from "react-router-dom";
 
 function FormularioCadastro() {
   const [mostrarSenha, setMostrarSenha] = useState(false);
@@ -15,6 +16,7 @@ function FormularioCadastro() {
   const [senhaValida, setSenhaValida] = useState(true);
   const [nome, setNome] = useState("");
   const [nomeValido, setNomeValido] = useState(true);
+  const navigate = useNavigate();
 
   const toggleMostrarSenha = () => {
     setMostrarSenha((prevState) => !prevState);
@@ -52,10 +54,10 @@ function FormularioCadastro() {
     }
   };
 
-  const handleSubmit = async (event) => {
+  function handleSubmit(event) {
     event.preventDefault();
 
-    if (!nome.trim() || !email.trim() || !telefone.trim() || !senha.trim()) {
+    if (!nome.trim() || !email.trim() || !senha.trim()) {
       toast.error("Todos os campos são obrigatórios.");
       return;
     }
@@ -77,38 +79,23 @@ function FormularioCadastro() {
       return;
     }
 
-    try {
-      const response = await axios.post("http://172.206.254.101:8080/clientes", {
-        nome,
-        email,
-        telefone,
-        senha,
-      });
+    // axios
+    //   .get(url)
+    //   .then((response) => {
+    //     setInfoEndereco(response.data);
+    //   })
+    //   .catch((error) => {
+    //     console.error(error);
+    //   });
 
-      if (response.status === 201) {
-        toast.success("Cadastro concluído com sucesso!");
-        
-        // Autenticar usuário após cadastro
-        const loginResponse = await axios.post("http://172.206.254.101:8080/clientes/login", {
-          email,
-          senha,
-        });
+    const dados = { nome, email, telefone, senha };
+    localStorage.setItem('user', JSON.stringify(dados));
 
-        if (loginResponse.data.token) {
-          localStorage.setItem('user', JSON.stringify(loginResponse.data));
-          setTimeout(() => {
-            window.location.href = "/cadastrarcondominio";
-          }, 3000); // Redireciona após 3 segundos
-        }
-      }
-    } catch (error) {
-      if (error.response && error.response.data && error.response.data.message) {
-        toast.error(error.response.data.message);
-      } else {
-        toast.error("Erro ao cadastrar usuário. Por favor, tente novamente.");
-      }
-      console.error("Erro ao cadastrar usuário:", error);
-    }
+    const redirecionaCondominio = () => {
+      navigate("/cadastrarcondominio");
+    };
+
+    redirecionaCondominio();
   };
 
   return (
